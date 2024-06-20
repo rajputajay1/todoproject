@@ -1,0 +1,50 @@
+
+
+.setting {
+    font-size: 22px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.input-container img.icon-class {
+    position: absolute;
+    left: 4px;
+
+    color: #828282;
+}
+
+.input-container img.icon-class-end {
+    position: absolute;
+    left: 400px;
+
+    color: #828282;
+
+}
+
+.input-container input {
+    padding-left: 40px;
+    font-size: 20px;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 400px;
+    color: #828282;
+
+}
+.updatebtn{
+    width: 450px;
+    height: 50px;
+    color: white;
+    background-color:  #17A2B8;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
