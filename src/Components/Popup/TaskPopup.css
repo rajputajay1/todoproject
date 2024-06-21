@@ -13,7 +13,7 @@
 .popup-content {
     background: white;
     border-radius: 8px;
-    padding: 10px 30px 30px  30px;
+    padding: 10px 30px 30px 30px;
     width: 45%;
 
 }
@@ -31,7 +31,7 @@
 }
 
 .todotaskinput {
-    width: 100%;
+    width: 97%;
     height: 45px;
     border-radius: 5px;
     border: 1px solid #E2E2E2;
@@ -55,16 +55,14 @@
 }
 
 .taskcirclemid {
-    background-color:
-        #18B0FF;
+    background-color: #18B0FF;
     height: 10px;
     width: 10px;
     border-radius: 50%;
 }
 
 .taskcirclelow {
-    background-color:
-        #63C05B;
+    background-color:      #63C05B;
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -113,9 +111,11 @@
 }
 
 .addtaskall {
-    position: relative;
+ 
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 10px; 
+    width: 100%;
 }
 
 .taskcheckbox {
@@ -127,7 +127,7 @@
 
 .taskcheckboxend {
     position: absolute;
-    right: 6px;
+    right: 5px;
     cursor: pointer;
 
 
@@ -177,7 +177,7 @@
 }
 
 .canclebtntask {
-    color:  #CF3636;
+    color: #CF3636;
     font-size: 16px;
     font-weight: 500;
     border: 1px solid #CF3636;
@@ -216,8 +216,27 @@
     justify-content: space-between;
 }
 
-.savecanclebtn{
+.savecanclebtn {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.selected{
+    background-color: 
+    #EEECEC;
+}
+
+.titletext{
+    color: 
+    #767575;
+}
+
+.addtaskallnewadd{
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+    width: 100%;
+    position: relative;
+    /* height: 200px; */
 }

@@ -1,4 +1,7 @@
-
+.dashboard-content {
+    /* overflow: hidden; */
+    /* height: 100vh; */
+}
 
 .dashborad-header {
     display: flex;

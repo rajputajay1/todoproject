@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './TaskPopup.css';
 
+
 const TaskPopup = ({ closePopup }) => {
+    const [prioritybtn, setPriorityBtn] = useState("")
+    const [tasks, setTasks] = useState([""]);
+
+
+    const handlebtn = (priority) => {
+        setPriorityBtn(priority)
+
+    }
+    const addTask = () => {
+        const newTasks = [...tasks, ""];
+        setTasks(newTasks);
+    };
+    const deleteTask = (index) => {
+        const updatedTasks = tasks.filter((task, i) => i !== index);
+        setTasks(updatedTasks);
+    };
+
     return (
         <div className="popup-overlay">
             <div className="popup-content">
@@ -17,17 +35,23 @@ const TaskPopup = ({ closePopup }) => {
                 <div className='taskbtns'>
 
                     <p className='tittle'>Select Priority   <span className='star'>*</span></p>
-                    <div className='taskhighpriority'>
+                    <div className={`taskhighpriority ${prioritybtn === 'high' ? 'selected' : ''}`}
+                        onClick={() => handlebtn('high')}
+                    >
                         <div className='taskcirclehigh'></div>
-                        <p className='tittle'>HIGH PRIORITY</p>
+                        <p className='tittle titletext'>HIGH PRIORITY</p>
                     </div>
-                    <div className='taskhighpriority'>
+                    <div className={`taskhighpriority ${prioritybtn === 'mid' ? 'selected' : ''}`}
+                        onClick={() => handlebtn('mid')}
+                    >
                         <div className='taskcirclemid'></div>
-                        <p className='tittle'>MODERATE PRIORITY</p>
+                        <p className='tittle titletext'>MODERATE PRIORITY</p>
                     </div>
-                    <div className='taskhighpriority'>
+                    <div className={`taskhighpriority ${prioritybtn === 'low' ? 'selected' : ''}`}
+                        onClick={() => handlebtn('low')}
+                    >
                         <div className='taskcirclelow'></div>
-                        <p className='tittle'>LOW PRIORITY</p>
+                        <p className='tittle titletext'>LOW PRIORITY</p>
                     </div>
                 </div>
 
@@ -38,25 +62,24 @@ const TaskPopup = ({ closePopup }) => {
                     />
                 </div>
                 <p className='tittle'>Checklist (1/3) <span className='star'>*</span> </p>
-                <div className='addtaskall'>
-                    <input type="checkbox" className='taskcheckbox' />
+                <div className='addtaskall addtaskallnewadd'>
+                    {tasks.map((task, index) => (
+                        <div className='addtaskallnewadd' key={index}>
+                            <input type="checkbox" className='taskcheckbox' />
+                            <input type="text" placeholder='Add a task' className='todotaskinputadd' />
+                            <img src="./Delete.svg" alt="Delete" className='taskcheckboxend'   onClick={() => deleteTask(index)}/>
+                        </div>
+                    ))}
+                    {/* <input type="checkbox" className='taskcheckbox' />
                     <input type="text" placeholder='Add a task' className='todotaskinputadd' />
-                    <img src="./Delete.svg" alt="Delete" className='taskcheckboxend' />
+                    <img src="./Delete.svg" alt="Delete" className='taskcheckboxend' /> */}
                 </div>
-                <div className='addtaskall'>
-                    <input type="checkbox" className='taskcheckbox' />
-                    <input type="text"
-                        placeholder='Add a task'
-                        className='todotaskinputadd'
-                    />
-                    <img src="./Delete.svg" alt="" className='taskcheckboxend' />
 
-                </div>
 
 
                 <div className='addbtntask'>
                     <img src="./addbtn.svg" alt="" />
-                    <p className='addnewtask'>Add New</p>
+                    <p className='addnewtask' onClick={addTask}>Add New</p>
 
                 </div>
                 <div className='threebtntask'>
