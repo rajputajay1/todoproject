@@ -119,3 +119,15 @@
     gap: 5px;
 }
 
+
+.addimg{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.addtaskpopupopen{
+    cursor: pointer;
+}
+.collpasbtn{
+    cursor: pointer;
+}

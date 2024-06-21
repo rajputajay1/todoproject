@@ -3,8 +3,10 @@ import "./Dashboard.css"
 import Sidebar from '../Sidebar/Sidebar'
 import ContainerBox from '../ContainerBox/ContainerBox'
 import { useState } from 'react'
+import  Add  from "../../../public/add.svg";
 
 const Dashboard = () => {
+
     const [week, setWeek] = useState(false)
 
     const handleWeek = () => {
@@ -52,13 +54,13 @@ const Dashboard = () => {
                 <div className='allcontainerboxes'>
 
 
-                    <ContainerBox></ContainerBox>
-                    <ContainerBox></ContainerBox>
-                    <ContainerBox></ContainerBox>
-                    <ContainerBox></ContainerBox>
+                    <ContainerBox name="Backlog" />
+                    <ContainerBox name="To do"img={Add} />
+                    <ContainerBox name="In progress"  />
+                    <ContainerBox name="Done" />
                 </div>
             </div>
-          
+
         </>
     )
 }

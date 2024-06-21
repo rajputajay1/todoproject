@@ -1,6 +1,17 @@
 import React from 'react'
 import "./ContainerBox.css"
-const ContainerBox = () => {
+import { useState } from 'react'
+import TaskPopup from '../Popup/TaskPopup'
+const ContainerBox = ({ name, img }) => {
+    const [addpopup, setAddPopup] = useState(false)
+
+    const handleAddPopup = () => {
+        setAddPopup(true)
+        console.log("ajjay");
+    }
+    const closePopup = () => {
+        setAddPopup(false);
+    };
     return (
         <>
             <div className='containerbox'>
@@ -9,9 +20,17 @@ const ContainerBox = () => {
                 <div className='scrollable'>
 
                     <div className="container-header">
-                        <p className="containertext" >Backlog</p>
-                        <p><img src="./collpas.svg" alt="" /></p>
+                        <p className="containertext" >{name}</p>
+                        <div className='addimg'>
+                            <img src={img} alt="" onClick={handleAddPopup}  className='addtaskpopupopen'/>
+
+                          
+                            <img src="./collpas.svg" alt="" className='collpasbtn' />
+
+                        </div>
+
                     </div>
+                   
                     <div className="container-content">
                         <div className="container-header">
 
@@ -188,7 +207,8 @@ const ContainerBox = () => {
                     </div>
                 </div>
             </div>
-
+      
+            {addpopup && <TaskPopup closePopup={closePopup} />}
         </>
     )
 }
