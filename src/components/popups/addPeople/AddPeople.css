@@ -1,0 +1,75 @@
+.container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1000;
+}
+.Add-people{
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+    /* align-items: center; */
+    justify-content: center;
+    gap: 30px;
+    width: 30%;
+    background-color: white;
+    padding: 12px;
+    border-radius: 12px;
+    /* margin-right: 10px; */
+
+}
+.input-container{
+    margin: 0 10px;
+}
+.input{
+    width: 95%;
+    height: 50px;
+    border-radius: 10px;
+
+    
+
+
+}
+input::placeholder {
+    color: #888; /* Placeholder text color */
+    font-style: italic; /* Placeholder text style */
+    font-size: 20px; /* Placeholder text size */
+    margin: 10px;
+}
+
+.add-text{
+font-size: 20px;
+font-weight: 600;
+
+}
+.button-container{
+    display: flex;
+    justify-content: space-between;
+width: 95%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.cancel-button{
+    width: 47%;
+    border: solid 1px red;
+ color: red;
+ height: 45px;
+ border-radius: 12px;
+ font-size: 16px;
+ font-weight: 600;
+ background: none;
+}
+.add-email{
+    width: 47%;
+    background-color: #17A2B8;
+ border: none;
+ color: white;
+ height: 45px;
+ border-radius: 12px;
+ font-size: 16px;
+ font-weight: 600;
+}
