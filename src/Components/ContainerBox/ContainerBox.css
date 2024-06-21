@@ -1,0 +1,133 @@
+.containerbox {
+    width: 300px;
+    background-color: #EEF2F5;
+    border-radius: 10px;
+    padding: 0 20px;
+}
+
+.container-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.containertext {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+
+}
+
+.container-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.circle {
+    border-radius: 50%;
+    background-color: #FF2473;
+    height: 10px;
+    width: 10px;
+}
+
+.high {
+    font-size: 10px;
+    font-weight: 500;
+    color: #707070;
+}
+
+.highbox {
+    display: flex;
+    gap: 8px;
+}
+
+.herosection {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.checklisttext {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
+}
+
+.arrowbox {
+    height: 25px;
+    width: 25px;
+    border-radius: 5px;
+    background-color: #EEECEC;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.innerbox {
+    border: 1px solid #eee;
+    display: flex;
+    border-radius: 10px;
+    padding: 0 3px;
+    gap: 5px;
+    margin: 10px 0;
+
+}
+
+.innerboxtext {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.dateinner {
+    background-color: #CF3636;
+    color: white;
+    font-size: 9px;
+    font-weight: 500;
+    border-radius: 7px;
+    padding: 0 10px;
+    height: 20px;
+    width: 25px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.btnspriorty {
+    background-color: #EEECEC;
+    color: #767575;
+    font-size: 9px;
+    font-weight: 500;
+    border-radius: 7px;
+    padding: 0 10px;
+    height: 20px;
+    /* width: 30px; */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+}
+
+.allbtns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.prioritybtns {
+    display: flex;
+    gap: 5px;
+}
+
+
+.addimg{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.addtaskpopupopen{
+    cursor: pointer;
+}
+.collpasbtn{
+    cursor: pointer;
+}
