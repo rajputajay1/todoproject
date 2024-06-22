@@ -55,9 +55,9 @@ const Dashboard = () => {
 
 
                     <ContainerBox name="Backlog" />
-                    <ContainerBox name="To do"img={Add} />
+                    {/* <ContainerBox name="To do"img={Add} />
                     <ContainerBox name="In progress"  />
-                    <ContainerBox name="Done" />
+                    <ContainerBox name="Done" /> */}
                 </div>
             </div>
 
