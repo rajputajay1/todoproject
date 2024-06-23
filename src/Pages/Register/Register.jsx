@@ -10,12 +10,12 @@ const AuthPage = () => {
     confirmPassword: '',
   });
 
-  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -32,7 +32,11 @@ const AuthPage = () => {
     <div className="auth-container">
       <div className="auth-content">
         <div className="astronaut-image">
-          <img src="Art.svg" alt="Astronaut" />
+          <div className='formbox'>
+
+        
+            <img src="Art.svg" alt="Astronaut" className='formimg' />
+            </div>
           <span className="welcome-text">Welcome aboard my friend</span>
           <span className="subtext">Just a couple of clicks and we start</span>
         </div>
@@ -40,42 +44,54 @@ const AuthPage = () => {
           <h2 className='head'>{isRegister ? 'Register' : 'Login'}</h2>
           {isRegister && (
             <div className="form-group">
+              <img src="pro.svg" alt="" className='frommail' />
               <input
                 type="text"
                 name="name"
                 placeholder="Name"
                 value={formData.name}
                 onChange={handleChange}
+                className='forminput'
               />
             </div>
           )}
           <div className="form-group">
+            <img src="mails.svg" alt="" className='frommail ' id='mailid' />
             <input
               type="email"
               name="email"
+                className='forminput'
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
+            <img src="pass.svg" alt="" className='frommail' />
             <input
               type="password"
               name="password"
+                className='forminput'
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
             />
+            <img src="seen.svg" alt="" className='passseenendform' />
           </div>
           {isRegister && (
             <div className="form-group">
+              <img src="pass.svg" alt="" className='frommail' />
+
               <input
                 type="password"
+                  className='forminput'
                 name="confirmPassword"
                 placeholder="Confirm Password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
               />
+                          <img src="seen.svg" alt="" className='passseenendform' />
+
             </div>
           )}
           <button type="submit" className="auth-button">

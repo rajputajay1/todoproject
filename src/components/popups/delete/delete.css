@@ -1,4 +1,4 @@
-.container{
+.container {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,52 +7,60 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
     z-index: 1000;
 }
-.popup{
+
+.popup {
     display: flex;
     flex-direction: column;
-    height: 20vh;
     width: 20%;
     align-items: center;
     justify-content: center;
     border: none;
     background-color: white;
     border-radius: 10px;
-    padding: 12px;
-   
+    padding: 15px;
+
+
 }
-.popup-text{
+
+.popup-text {
     color: black;
     font-size: 14px;
- font-weight: 600;
+    font-weight: 600;
 
 }
-.popup-buttons{
+
+.popup-buttons {
     display: flex;
     flex-direction: column;
-    gap:.5rem;
-    width:90%;
-   /* height: 80px; */
+    width: 90%;
+    /* height: 80px; */
+    gap: 15px;
 }
-.Accept{
- background-color: #17A2B8;
- border: none;
- color: white;
- height: 45px;
- border-radius: 12px;
- font-size: 16px;
- font-weight: 600;
+
+.Accept {
+    background-color: #17A2B8;
+    border: none;
+    color: white;
+    height: 45px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
 }
-.cancle{
+
+.cancle {
     border: solid 1px red;
     background: none;
- color: red;
- height: 45px;
- border-radius: 12px;
- font-size: 16px;
- font-weight: 600;
-
+    color: red;
+    height: 45px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    cursor: pointer;
 
 }

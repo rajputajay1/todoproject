@@ -1,13 +1,13 @@
-.dashboard-content {
-    /* overflow: hidden; */
-    /* height: 100vh; */
-}
-
 .dashborad-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
+}
+
+.dashboard-content {
+    height: 100%;
+    overflow-y: hidden;
 }
 
 .welcome {
@@ -59,8 +59,10 @@
 
 .allcontainerboxes {
     display: flex;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     gap: 20px;
+    margin-top: 100px;
+    overflow-x: hidden;
 }
 
 .thisweek {
@@ -83,4 +85,9 @@
     font-weight: 500;
     color: black;
     cursor: pointer;
+}
+
+.upertextfixed {
+    position: sticky;
+    height: 100px;
 }

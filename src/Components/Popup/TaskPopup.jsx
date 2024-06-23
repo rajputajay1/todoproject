@@ -1,7 +1,25 @@
 import React from 'react';
 import './TaskPopup.css';
+import { useState } from 'react';
 
 const TaskPopup = ({ closePopup }) => {
+
+    const [prioritybtn, setPriorityBtn] = useState("")
+    const [tasks, setTasks] = useState([""]);
+
+
+    const handlebtn = (priority) => {
+        setPriorityBtn(priority)
+
+    }
+    const addTask = () => {
+        const newTasks = [...tasks, ""];
+        setTasks(newTasks);
+    };
+    const deleteTask = (index) => {
+        const updatedTasks = tasks.filter((task, i) => i !== index);
+        setTasks(updatedTasks);
+    };
     return (
         <div className="popup-overlay">
             <div className="popup-content">
@@ -16,15 +34,21 @@ const TaskPopup = ({ closePopup }) => {
                 <div className='taskbtns'>
 
                     <p className='tittle'>Select Priority   <span className='star'>*</span></p>
-                    <div className='taskhighpriority'>
+                    <div className={`taskhighpriority ${prioritybtn === 'high' ? 'selected' : ''}`}
+                        onClick={() => handlebtn('high')}
+                    >
                         <div className='taskcirclehigh'></div>
                         <p className='tittle'>HIGH PRIORITY</p>
                     </div>
-                    <div className='taskhighpriority'>
+                    <div className={`taskhighpriority ${prioritybtn === 'mid' ? 'selected' : ''}`}
+                        onClick={() => handlebtn('mid')}
+                    >
                         <div className='taskcirclemid'></div>
                         <p className='tittle'>MODERATE PRIORITY</p>
                     </div>
-                    <div className='taskhighpriority'>
+                    <div className={`taskhighpriority ${prioritybtn === 'low' ? 'selected' : ''}`}
+                        onClick={() => handlebtn('low')}
+                    >
                         <div className='taskcirclelow'></div>
                         <p className='tittle'>LOW PRIORITY</p>
                     </div>
@@ -37,26 +61,24 @@ const TaskPopup = ({ closePopup }) => {
                     />
                 </div>
                 <p className='tittle'>Checklist (1/3) <span className='star'>*</span> </p>
-                <div className='addtaskall'>
-                    <input type="checkbox" className='taskcheckbox' />
-                    <input type="text" placeholder='Add a task' className='todotaskinputadd' />
-                    <img src="./Delete.svg" alt="Delete" className='taskcheckboxend' />
-                </div>
-                <div className='addtaskall'>
-                    <input type="checkbox" className='taskcheckbox' />
-                    <input type="text"
-                        placeholder='Add a task'
-                        className='todotaskinputadd'
-                    />
-                    <img src="./Delete.svg" alt="" className='taskcheckboxend' />
-
+                <div className='mainaddtasktodo'>
+                    {tasks.map((task, index) => (
+                        <div className='taskItem' key={index}>
+                            <input type="checkbox" className='inputcheckboxtodostart' />
+                            <input type="text" placeholder='Add a task' className='ajay' />
+                            <img src="./Delete.svg" alt="Delete" className='inputcheckboxtodoend' onClick={() => deleteTask(index)} />
+                        </div>
+                    ))}
                 </div>
 
 
                 <div className='addbtntask'>
-                    <img src="./addbtn.svg" alt="" />
-                    <p className='addnewtask'>Add New</p>
+                    <div onClick={addTask} className='addbtntask'>
 
+
+                        <img src="./addbtn.svg" alt="" />
+                        <p className='addnewtask'>Add New</p>
+                    </div>
                 </div>
                 <div className='threebtntask'>
                     <div className='datebtntask'>Select Due Date</div>

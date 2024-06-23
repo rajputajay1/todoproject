@@ -1,5 +1,3 @@
-
-
 .setting {
     font-size: 22px;
     font-weight: 600;
@@ -16,6 +14,8 @@
 .input-container img.icon-class {
     position: absolute;
     left: 4px;
+    /* height: 25px;
+    width: 25px; */
 
     color: #828282;
 }
@@ -38,13 +38,24 @@
     color: #828282;
 
 }
-.updatebtn{
+
+.updatebtn {
     width: 450px;
     height: 50px;
     color: white;
-    background-color:  #17A2B8;
+    background-color: #17A2B8;
     border-radius: 50px;
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    align-items: center;
+
+}
+
+#mailsimg {
+    padding-left: 5px;
+}
+
+.updatetext {
+    font-size: 20px;
 }

@@ -1,112 +1,175 @@
-
 .auth-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 98vh; 
-  }
-  .head{
-    align-self: center;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.head {
+  font-size: 33px;
+  font-weight: 600;
+  color:
+    #343434;
+}
+
+.auth-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  background: #17A2B8;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+
+}
+
+
+.astronaut-image {
+  width: 1010px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  background: #17A2B8;
+  color: #fff;
+}
+
+.formimg {
+  position: absolute;
+  bottom: -50%; 
+  left: 50%;
+  transform: translateX(-52%);
+  height: 300px;
+}
+
+.formbox {
+  height: 180px;
+  width: 180px;
+  position: relative;
+  border-radius: 50%;
+  background-color: #317F8B;
+}
+
+.welcome-text {
+  font-size: 33px;
+  font-weight: 600;
+  margin-top: 50px;
+
+}
+
+.subtext {
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 5px;
+
+}
+
+
+.auth-form {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  gap: 25px;
+  background-color: #fff;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: start;
+}
+
+.frommail {
+  position: absolute;
+  left: 5px;
+}
+
+.form-group input {
+  width: 500px;
+  height: 50px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.forminput::placeholder {
+  padding: 30px 35px 0 35px;
+  font-size: 20px;
+
+}
+
+.auth-button {
+
+  background-color: #17A2B8;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  width: 505px;
+  height: 50px;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 20px;
+
+}
+
+
+.auth-toggle {
+  font-size: 20px;
+  font-weight: 400;
+  color: #828282;
+  text-align: center;
+
+
+}
+
+.auth-toggle span {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.inActive {
+  border: #17A2B8 2px solid;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 400;
+  width: 505px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color:
+    #17A2B8;
+  margin-top: 15px;
+
+
+
+}
+
+@media (max-width: 768px) {
   .auth-content {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    background: #17A2B8;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
-
+    flex-direction: column;
   }
-  
 
   .astronaut-image {
-    width: 1010px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    padding: 2rem;
-    background: #17A2B8;
-    color: #fff;
-  }
-  
-  .astronaut-image img {
-    max-width: 200px;
-    margin-bottom: 1rem;
-  }
-  
-  .welcome-text {
-    font-size: 33px;
-  }
-  
-  .subtext {
-    margin-top: 19px;
-  }
-  
-  
-  .auth-form {
-
-    display: flex;
-    flex-direction: column;
-    flex: 1;
     padding: 1rem;
-    background-color: #fff;
-    justify-content: center;
   }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group input {
-    width: 80%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .auth-button {
-   
-    padding: 0.5rem 1rem;
-    background-color: #17A2B8;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-  
 
-  .auth-toggle {
-    margin-top: 1rem;
-    text-align: center;
+  .astronaut-image img {
+    max-width: 150px;
   }
-  
-  .auth-toggle span {
-    display: flex;
-    flex-direction: column;
-    color: #2c3e50;
-    cursor: pointer;
-  }
-  .inActive{
-    border: #17A2B8 2px solid;
-    border-radius: 10px;
-  }
-  
-  @media (max-width: 768px) {
-    .auth-content {
-      flex-direction: column;
-    }
-  
-    .astronaut-image {
-      padding: 1rem;
-    }
-  
-    .astronaut-image img {
-      max-width: 150px;
-    }
-  }
-  
+}
+
+.passseenendform {
+  position: absolute;
+  left: 470px;
+}
+
+#mailid {
+  padding-left: 5px;
+}
