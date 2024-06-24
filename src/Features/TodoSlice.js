@@ -1,3 +1,6 @@
+
+
+
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 const todoSlice = createSlice({
@@ -9,7 +12,7 @@ const todoSlice = createSlice({
                 title: "ajay",
                 priority: 'HIGH',
                 status: 'to-do',
-                assineto :[],
+                assineto: [],
                 checklist: [
                     { text: 'rahul', checked: true },
                     { text: 'ajauy', checked: false },
@@ -17,16 +20,12 @@ const todoSlice = createSlice({
                     { text: 'fghf', checked: false },
                 ],
                 date: 'Jun 17',
-
             },
-          
         ],
     },
     reducers: {
         addTasks: (state, action) => {
-            
             state.tasks.push(action.payload);
-        
         },
         updateTask: (state, action) => {
             const index = state.tasks.findIndex(task => task.id === action.payload.id);

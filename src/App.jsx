@@ -7,7 +7,9 @@ function App() {
   return (
     <>
       {/* <Register></Register> */}
-      <Public />
+      {/* <Public />
+       */}
+       <Sidebar/>
     </>
   )
 }

@@ -1,255 +1,159 @@
-import React from 'react'
-import "./ContainerBox.css"
-import { useState } from 'react'
-import TaskPopup from '../Popup/TaskPopup'
-import Delet from '../popups/delete/Delet'
-import { useSelector, useDispatch } from 'react-redux'
-const ContainerBox = ({ name, img }) => {
-    // console.log("data" + data);
-    const [addpopup, setAddPopup] = useState(false)
-    const [colapps, setColapps] = useState(true)
+import React, { useState } from 'react';
+import './ContainerBox.css';
+import TaskPopup from '../Popup/TaskPopup';
+import Delet from '../popups/delete/Delet';
+import { useDispatch } from 'react-redux';
+import { updateTaskStatus, removeTask, updateChecklistChecked } from '../../Features/TodoSlice';
 
-    const [deletepopup, setDeletePopup] = useState(false)
+const ContainerBox = ({ name, img, data }) => {
+    const [addpopup, setAddPopup] = useState(false);
+    const [colapps, setColapps] = useState(true);
+    const [deletepopup, setDeletePopup] = useState(false);
+    const [sharepopup, setSharepopup] = useState(false);
+    const [taskToDelete, setTaskToDelete] = useState(null);
 
-    const [sharepopup, setSharepopup] = useState(false)
+    const dispatch = useDispatch();
 
-    const handleAddPopup = () => {
-        setAddPopup(true)
-        console.log("ajjay");
-    }
-    const closePopup = () => {
-        setAddPopup(false);
+    const handleAddPopup = () => setAddPopup(true);
+    const closePopup = () => setAddPopup(false);
+    const handleColaps = () => setColapps(false);
+    const handleCalapsClose = () => setColapps(true);
+    const handleShare = () => setSharepopup(true);
+    const handleShareClose = () => setSharepopup(false);
+    const handleAllColaps = () => setColapps(!colapps);
+
+    const handleDelete = (taskId) => {
+        setTaskToDelete(taskId);
+        setDeletePopup(true);
     };
 
-    const handlecolaps = () => {
-        setColapps(false)
-        console.log("ajay");
-    }
-    const handlecalappsclose = () => {
-        setColapps(true)
-    }
-
-    const handleshare = () => {
-        setSharepopup(true)
-    }
-    const handleshareclose = () => {
-        setSharepopup(false)
-    }
-
-    const handleallcolopass = () => {
-        setColapps(!colapps); // Toggle the state
+    const handleDeleteClose = () => {
+        setDeletePopup(false);
+        setTaskToDelete(null);
     };
 
-    const handledelete = () => {
-        setDeletePopup(true)
-    }
-    const handledeleteclose = () => {
-        setDeletePopup(false)
-    }
+    const confirmDelete = () => {
+        if (taskToDelete) {
+            dispatch(removeTask(taskToDelete));
+        }
+        setDeletePopup(false);
+        setTaskToDelete(null);
+    };
 
-    const todos = useSelector(state => state.todos)
+    const changeTaskStatus = (taskId, newStatus) => {
+        dispatch(updateTaskStatus({ id: taskId, newStatus }));
+    };
+
+    const updateChecklistItem = (taskId, text, checked) => {
+        dispatch(updateChecklistChecked({ id: taskId, text, checked }));
+    };
+
+    const addNewTask = (newTask) => {
+        // Normally you would add the new task to your data source (Redux state, API, etc.)
+        // For demonstration, let's assume we're adding directly to the data state
+        setData([...data, newTask]);
+    };
+
+    const currentDate = new Date(); // Get current date
 
     return (
         <>
             <div className='containerbox'>
-
-
                 <div className='scrollable'>
-
                     <div className="container-header">
-                        <p className="containertext" >{name}</p>
+                        <p className="containertext">{name}</p>
                         <div className='addimg'>
-                            <img src={img} alt="" onClick={handleAddPopup} className='addtaskpopupopen' />
-
-
-                            <img src="./collpas.svg" alt="" className='collpasbtn' onClick={handleallcolopass} />
-
+                            {img && name === "To do" && <img src={img} alt="Add Task" onClick={handleAddPopup} className='addtaskpopupopen' />}
+                            <img src="./collpas.svg" alt="Collapse" className='collpasbtn' onClick={handleAllColaps} />
                         </div>
-
-                    </div>
-
-                    <div className="container-content">
-                        <div className="container-header">
-
-
-                            <div className="highbox">
-                                <div className="circle"></div>
-                                <span className="high">HIGH PRIORITY</span>
-                            </div>
-                            <div className='ppp'>
-
-
-                                <img src="./dashdot.svg" alt="" onClick={handleshare} className='dashdot' />
-                                {sharepopup && (
-                                    <div className='sharepopop' onClick={handleshareclose}>
-                                        <p className=''>Edit</p>
-                                        <p className='sharepopopbtns'>Share</p>
-                                        <p className='delteeshare' onClick={handledelete}>Delete</p>
-
-                                    </div>
-                                )}
-                                {deletepopup && (
-                                    <div>
-                                        <Delet onClose={handledeleteclose} text="Delete" />
-                                    </div>
-                                )}
-
-                            </div>
-                        </div>
-
-                        <p className="herosection"></p>
-                        <div className="container-header">
-                            <p className="checklisttext">Checklist (1/3)</p>
-                            <div className="arrowbox">
-
-                                {colapps === true ? <img src="./dasharrow.svg" alt="" onClick={handlecolaps} /> : <img src="./downarrow.svg" alt="" onClick={handlecalappsclose} />}
-                                {/* <img src="./dasharrow.svg" alt="" onClick={handlecolaps} /> */}
-
-                            </div>
-                        </div>
-
-                        {colapps && (
-                            <div>
-
-
-
-                                <div className="innerbox">
-                                    <input type="checkbox" className="checkbox" />
-                                    <p className="innerboxtext">Task to be done</p>
-
-                                </div>
-                                <div className="innerbox">
-                                    <input type="checkbox" className="checkbox" />
-                                    <p className="innerboxtext">Task to be done</p>
-
-                                </div>
-                                <div className="innerbox">
-                                    <input type="checkbox" className="checkbox" />
-                                    <p className="innerboxtext">Task to be done ede lorem
-                                        Ipsum is a Dummy text t</p>
-
-                                </div>
-                            </div>
-                        )}
-
-                        <div className="allbtns">
-
-
-                            <div className="dateinner">
-                                <p>10 feb</p>
-                            </div>
-                            <div className="prioritybtns">
-
-
-                                <div className="btnspriorty">
-                                    <p>PROGRESS</p>
-                                </div>
-                                <div className="btnspriorty">
-                                    <p>TO-DO</p>
-                                </div>
-                                <div className="btnspriorty">
-                                    <p>DONE</p>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                     <div className="container-content">
-                        <div className="container-header">
-
-
-                            <div className="highbox">
-                                <div className="circle"></div>
-                                <span className="high">HIGH PRIORITY</span>
-                            </div>
-                            <div className='ppp'>
-
-
-                                <img src="./dashdot.svg" alt="" onClick={handleshare} className='dashdot' />
-                                {sharepopup && (
-                                    <div className='sharepopop' onClick={handleshareclose}>
-                                        <p className=''>Edit</p>
-                                        <p className='sharepopopbtns'>Share</p>
-                                        <p className='delteeshare' onClick={handledelete}>Delete</p>
-
+                        {data.map(task => (
+                            <div className="task" key={task.id}>
+                                <div className="task-content">
+                                    <div className="container-header">
+                                        <div className="highbox">
+                                            <div className="circle"></div>
+                                            <span className="high">{task.priority.toUpperCase()} PRIORITY</span>
+                                        </div>
+                                        <div className='ppp'>
+                                            <img src="./dashdot.svg" alt="Options" id={task.id} onClick={handleShare} className='dashdot' />
+                                            {sharepopup && (
+                                                <div className='sharepopop' onClick={handleShareClose}>
+                                                    <p>Edit</p>
+                                                    <p className='sharepopopbtns'>Share</p>
+                                                    <p className='delteeshare' onClick={() => handleDelete(task.id)}>Delete</p>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
-                                )}
-                                {deletepopup && (
-                                    <div>
-                                        <Delet onClose={handledeleteclose} text="Delete" />
+
+                                    <p className="herosection">{task.title}</p>
+
+                                    <div className="container-header">
+                                        <p className="checklisttext">Checklist ({task.checklist.filter(item => item.checked).length}/{task.checklist.length})</p>
+                                        <div className="arrowbox">
+                                            {colapps ? <img src="./dasharrow.svg" alt="Collapse" onClick={handleColaps} /> : <img src="./downarrow.svg" alt="Expand" onClick={handleCalapsClose} />}
+                                        </div>
                                     </div>
-                                )}
 
-                            </div>
-                        </div>
+                                    {colapps && (
+                                        <div className="checklist">
+                                            {task.checklist.map((item, index) => (
+                                                <div className="innerbox" key={index}>
+                                                    <input
+                                                        type="checkbox"
+                                                        className="checkbox"
+                                                        checked={item.checked}
+                                                        onChange={() => updateChecklistItem(task.id, item.text, !item.checked)}
+                                                    />
+                                                    <p className="innerboxtext">{item.text}</p> {/* Ensure item.text is correctly accessed */}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
 
-                        <p className="herosection">Hero section</p>
-                        <div className="container-header">
-                            <p className="checklisttext">Checklist (1/3)</p>
-                            <div className="arrowbox">
-
-                                {colapps === true ? <img src="./dasharrow.svg" alt="" onClick={handlecolaps} /> : <img src="./downarrow.svg" alt="" onClick={handlecalappsclose} />}
-                                {/* <img src="./dasharrow.svg" alt="" onClick={handlecolaps} /> */}
-
-                            </div>
-                        </div>
-
-                        {colapps && (
-                            <div>
-
-
-
-                                <div className="innerbox">
-                                    <input type="checkbox" className="checkbox" />
-                                    <p className="innerboxtext">Task to be done</p>
-
-                                </div>
-                                <div className="innerbox">
-                                    <input type="checkbox" className="checkbox" />
-                                    <p className="innerboxtext">Task to be done</p>
-
-                                </div>
-                                <div className="innerbox">
-                                    <input type="checkbox" className="checkbox" />
-                                    <p className="innerboxtext">Task to be done ede lorem
-                                        Ipsum is a Dummy text t</p>
-
-                                </div>
-                            </div>
-                        )}
-
-                        <div className="allbtns">
-
-
-                            <div className="dateinner">
-                                <p>10 feb</p>
-                            </div>
-                            <div className="prioritybtns">
-
-
-                                <div className="btnspriorty">
-                                    <p>PROGRESS</p>
-                                </div>
-                                <div className="btnspriorty">
-                                    <p>TO-DO</p>
-                                </div>
-                                <div className="btnspriorty">
-                                    <p>DONE</p>
+                                    <div className="allbtns">
+                                        {task.date && task.date !== 'none' && (
+                                            <div className="dateinner" style={{ color: task.date < currentDate && task.status === 'done' ? 'green' : 'inherit' }}>
+                                                <p>{task.date}</p>
+                                            </div>
+                                        )}
+                                        <div className="prioritybtns">
+                                            {task.status !== 'backlog' && (
+                                                <div className="btnspriorty" onClick={() => changeTaskStatus(task.id, 'backlog')}>
+                                                    <p>BACKLOG</p>
+                                                </div>
+                                            )}
+                                            {task.status !== 'to-do' && (
+                                                <div className="btnspriorty" onClick={() => changeTaskStatus(task.id, 'to-do')}>
+                                                    <p>TO-DO</p>
+                                                </div>
+                                            )}
+                                            {task.status !== 'inProgress' && (
+                                                <div className="btnspriorty" onClick={() => changeTaskStatus(task.id, 'inProgress')}>
+                                                    <p>IN PROGRESS</p>
+                                                </div>
+                                            )}
+                                            {task.status !== 'done' && (
+                                                <div className="btnspriorty" onClick={() => changeTaskStatus(task.id, 'done')}>
+                                                    <p>DONE</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        ))}
                     </div>
-
-
-
                 </div>
-
             </div>
-
-            {addpopup && <TaskPopup closePopup={closePopup} />}
+            {addpopup && <TaskPopup closePopup={closePopup} addNewTask={addNewTask} />}
+            {deletepopup && (
+                <Delet onClose={handleDeleteClose} onConfirm={confirmDelete} text="delete this task" />
+            )}
         </>
-    )
-}
+    );
+};
 
-export default ContainerBox
+export default ContainerBox;

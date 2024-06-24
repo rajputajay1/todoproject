@@ -1,24 +1,28 @@
+
+
 import React, { useState } from 'react';
 import './TaskPopup.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTasks, updateTask } from '../../Features/TodoSlice';
+import { useDispatch } from 'react-redux';
+import { addTasks } from '../../Features/TodoSlice';
 import { nanoid } from '@reduxjs/toolkit';
 
 const TaskPopup = ({ closePopup }) => {
-    const [prioritybtn, setPriorityBtn] = useState("");
-    const [input, setInput] = useState("");
-    const [assine, setAssine] = useState("");
+    const [prioritybtn, setPriorityBtn] = useState('');
+    const [input, setInput] = useState('');
+    const [assine, setAssine] = useState('');
     const [dueDate, setDueDate] = useState(null);
-    const [checklist, setChecklist] = useState([{ task: "", completed: false }]);
+    const [checklist, setChecklist] = useState([{ task: '', completed: false }]);
+
+    const dispatch = useDispatch();
 
     const handlebtn = (priority) => {
         setPriorityBtn(priority);
     };
 
     const addTask = () => {
-        setChecklist([...checklist, { task: "", completed: false }]);
+        setChecklist([...checklist, { task: '', completed: false }]);
     };
 
     const deleteTask = (index) => {
@@ -39,10 +43,7 @@ const TaskPopup = ({ closePopup }) => {
         );
         setChecklist(updatedChecklist);
     };
-    const dispatch = useDispatch(
 
-
-    )
     const formvalue = () => {
         dispatch(
             addTasks({
@@ -52,39 +53,12 @@ const TaskPopup = ({ closePopup }) => {
                 assignee: assine,
                 dueDate: dueDate,
                 checklist: checklist,
-                status: "to-do"
-
+                status: 'to-do',
             })
-        )
+        );
         closePopup();
-        // console.log({
-        //     id: nanoid(),
-        //     title: input,
-        //     priority: prioritybtn,
-        //     assignee: assine,
-        //     dueDate: dueDate,
-        //     checklist: checklist,
-        //     status: "to-do"
-        // });
+        console.log(dueDate)
     };
-
-
-
-
-    // const dispatch = useDispatch(
-    //     addTask({
-    //         id:nanoid(),
-    //         title: input,
-    //         priority: prioritybtn,
-    //         assignee: assine,
-    //         dueDate: dueDate,
-    //         checklist: checklist,
-
-    //     })
-    // );
-
-
-
 
     return (
         <div className="popup-overlay">
@@ -147,8 +121,8 @@ const TaskPopup = ({ closePopup }) => {
                                 type="text"
                                 placeholder='Add a task'
                                 className='ajay'
-                                value={item.task}
-                                onChange={(e) => handleTaskChange(index, e.target.value)}
+                                value={item.task}  // Ensure input value is bound to state
+                                onChange={(e) => handleTaskChange(index, e.target.value)}  // Handle input change
                             />
                             <img
                                 src="./Delete.svg"
