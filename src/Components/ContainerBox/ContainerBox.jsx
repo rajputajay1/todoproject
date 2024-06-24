@@ -3,7 +3,9 @@ import "./ContainerBox.css"
 import { useState } from 'react'
 import TaskPopup from '../Popup/TaskPopup'
 import Delet from '../popups/delete/Delet'
+import { useSelector, useDispatch } from 'react-redux'
 const ContainerBox = ({ name, img }) => {
+    // console.log("data" + data);
     const [addpopup, setAddPopup] = useState(false)
     const [colapps, setColapps] = useState(true)
 
@@ -44,6 +46,9 @@ const ContainerBox = ({ name, img }) => {
     const handledeleteclose = () => {
         setDeletePopup(false)
     }
+
+    const todos = useSelector(state => state.todos)
+
     return (
         <>
             <div className='containerbox'>
@@ -92,7 +97,7 @@ const ContainerBox = ({ name, img }) => {
                             </div>
                         </div>
 
-                        <p className="herosection">Hero section</p>
+                        <p className="herosection"></p>
                         <div className="container-header">
                             <p className="checklisttext">Checklist (1/3)</p>
                             <div className="arrowbox">

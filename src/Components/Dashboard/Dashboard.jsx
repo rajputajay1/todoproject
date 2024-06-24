@@ -4,6 +4,8 @@ import ContainerBox from '../ContainerBox/ContainerBox'
 import { useState } from 'react'
 import Add from "../../../public/add.svg";
 import PeopleAdded from '../popups/peopleAdded/PeopleAdded';
+import { useSelector } from 'react-redux';
+import TodoSlice from '../../Features/TodoSlice';
 
 
 const Dashboard = () => {
@@ -26,6 +28,9 @@ const Dashboard = () => {
     const handleCloseAddPeoplePopup = () => {
         setShowAddPeoplePopup(false);
     };
+    // const todos = useSelector(state => state.todos)
+
+
 
 
 
@@ -67,7 +72,9 @@ const Dashboard = () => {
 
                 <div className='allcontainerboxes'>
 
-
+                    {/* {
+                        state.todos.tasks.filter(task => task.status === 'backlog')
+                    } */}
                     <ContainerBox name="Backlog" />
                     <ContainerBox name="To do" img={Add} />
                     <ContainerBox name="In progress" />
