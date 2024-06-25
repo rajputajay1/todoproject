@@ -14,9 +14,11 @@ const Dashboard = () => {
     const handleAddPeople = () => setShowAddPeoplePopup(true);
     const handleCloseAddPeoplePopup = () => setShowAddPeoplePopup(false);
 
+    
+
+
     const Alltasks = useSelector(state => state.todo.tasks);
 
-    console.log("Tasks from store: ", Alltasks);
 
     const backlogTasks = Alltasks.filter(task => task.status === 'backlog');
     const todoTasks = Alltasks.filter(task => task.status === 'to-do');

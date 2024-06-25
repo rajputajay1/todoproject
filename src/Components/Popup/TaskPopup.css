@@ -10,7 +10,9 @@
     align-items: center;
     z-index: 10000;
 }
-
+.error{
+    color: red;
+}
 .popup-content {
     background: white;
     border-radius: 8px;

@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import './TaskPopup.css';
 import DatePicker from 'react-datepicker';
@@ -13,7 +12,8 @@ const TaskPopup = ({ closePopup }) => {
     const [input, setInput] = useState('');
     const [assine, setAssine] = useState('');
     const [dueDate, setDueDate] = useState(null);
-    const [checklist, setChecklist] = useState([{ task: '', completed: false }]);
+    const [checklist, setChecklist] = useState([]);
+    const [error, setError] = useState('');
 
     const dispatch = useDispatch();
 
@@ -45,6 +45,21 @@ const TaskPopup = ({ closePopup }) => {
     };
 
     const formvalue = () => {
+        if (!input.trim()) {
+            setError('Title is required.');
+            return;
+        }
+
+        if (!prioritybtn) {
+            setError('Priority is required.');
+            return;
+        }
+
+        if (checklist.length === 0 || checklist.some(item => !item.task.trim())) {
+            setError('At least one subtask is required.');
+            return;
+        }
+
         dispatch(
             addTasks({
                 id: nanoid(),
@@ -57,7 +72,6 @@ const TaskPopup = ({ closePopup }) => {
             })
         );
         closePopup();
-        console.log(dueDate)
     };
 
     return (
@@ -121,8 +135,8 @@ const TaskPopup = ({ closePopup }) => {
                                 type="text"
                                 placeholder='Add a task'
                                 className='ajay'
-                                value={item.task}  // Ensure input value is bound to state
-                                onChange={(e) => handleTaskChange(index, e.target.value)}  // Handle input change
+                                value={item.task}
+                                onChange={(e) => handleTaskChange(index, e.target.value)}
                             />
                             <img
                                 src="./Delete.svg"
@@ -139,6 +153,7 @@ const TaskPopup = ({ closePopup }) => {
                         <p className='addnewtask'>Add New</p>
                     </div>
                 </div>
+                {error && <p className='error'>{error}</p>}
                 <div className='threebtntask'>
                     <DatePicker
                         selected={dueDate}

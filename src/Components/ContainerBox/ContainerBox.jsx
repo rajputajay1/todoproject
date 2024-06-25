@@ -54,6 +54,11 @@ const ContainerBox = ({ name, img, data }) => {
         setData([...data, newTask]);
     };
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+    };
+
     const currentDate = new Date(); // Get current date
 
     return (
@@ -67,9 +72,10 @@ const ContainerBox = ({ name, img, data }) => {
                             <img src="./collpas.svg" alt="Collapse" className='collpasbtn' onClick={handleAllColaps} />
                         </div>
                     </div>
-                    <div className="container-content">
+                    <div className=" ">
+
                         {data.map(task => (
-                            <div className="task" key={task.id}>
+                            <div className="container-content" key={task.id}>
                                 <div className="task-content">
                                     <div className="container-header">
                                         <div className="highbox">
@@ -107,18 +113,19 @@ const ContainerBox = ({ name, img, data }) => {
                                                         checked={item.checked}
                                                         onChange={() => updateChecklistItem(task.id, item.text, !item.checked)}
                                                     />
-                                                    <p className="innerboxtext">{item.text}</p> {/* Ensure item.text is correctly accessed */}
+                                                    <p className="innerboxtext">{item.task}</p> {/* Ensure item.text is correctly accessed */}
                                                 </div>
                                             ))}
                                         </div>
                                     )}
 
                                     <div className="allbtns">
-                                        {task.date && task.date !== 'none' && (
-                                            <div className="dateinner" style={{ color: task.date < currentDate && task.status === 'done' ? 'green' : 'inherit' }}>
-                                                <p>{task.date}</p>
+                                        {task.dueDate ?
+                                            <div className="dateinner" style={{ backgroundColor: new Date(task.dueDate) < currentDate && task.status === 'done' ? 'green' : 'red' }}>
+                                                <p>{formatDate(task.dueDate)}</p>
                                             </div>
-                                        )}
+                                            : <div className='dateinner'></div>}
+                                    
                                         <div className="prioritybtns">
                                             {task.status !== 'backlog' && (
                                                 <div className="btnspriorty" onClick={() => changeTaskStatus(task.id, 'backlog')}>
