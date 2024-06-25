@@ -9,11 +9,22 @@ const Dashboard = () => {
     const [showAddPeoplePopup, setShowAddPeoplePopup] = useState(false);
     const [week, setWeek] = useState(false);
 
+    const [selectedweekoption, setSelectedWeekoption] = useState("This week");
+
+    const handleoptionWeek = (Options) => {
+        setSelectedWeekoption(Options);
+        setWeek(false);
+        console.log(Options);
+    }
+
     const handleWeek = () => setWeek(true);
     const handleCloseWeek = () => setWeek(false);
     const handleAddPeople = () => setShowAddPeoplePopup(true);
     const handleCloseAddPeoplePopup = () => setShowAddPeoplePopup(false);
 
+<<<<<<< HEAD
+
+=======
     function formatDate() {
         const date = new Date();
         const day = date.getDate();
@@ -38,6 +49,7 @@ const Dashboard = () => {
   
 
     
+>>>>>>> c711aabf5100821138face668e1a4c22828f6fdb
 
 
     const Alltasks = useSelector(state => state.todo.tasks);
@@ -65,15 +77,19 @@ const Dashboard = () => {
                             </p>
                         </div>
                         <p className='week' onClick={handleWeek}>
-                            This week <span><img src="./dashboard1.svg" alt="This week" /></span>
+                            {selectedweekoption} <span><img src="./dashboard1.svg" alt="This week" /></span>
                         </p>
                         {week && (
                             <div className='thisweek' onClick={handleCloseWeek}>
-                                <p className='thisweektext'>Today</p>
-                                <p className='thisweektext'>This Week</p>
-                                <p className='thisweektext'>This Month</p>
+                                <p className='thisweektext' onClick={() => handleoptionWeek('Today')}>Today</p>
+                                <p className='thisweektext' onClick={() => handleoptionWeek('This week')}>This Week</p>
+                                <p className='thisweektext' onClick={() => handleoptionWeek('This month')}>This Month</p>
                             </div>
-                        )}
+                        )
+
+
+                        }
+
                     </div>
                 </header>
                 <div className='allcontainerboxes'>
