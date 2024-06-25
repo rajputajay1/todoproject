@@ -11,6 +11,9 @@
     align-items: center;
     /* z-index: 1000; */
 }
+.email-error{
+    color: red;
+}
 
 .popup-contentpeople {
     background-color: white;

@@ -14,6 +14,29 @@ const Dashboard = () => {
     const handleAddPeople = () => setShowAddPeoplePopup(true);
     const handleCloseAddPeoplePopup = () => setShowAddPeoplePopup(false);
 
+    function formatDate() {
+        const date = new Date();
+        const day = date.getDate();
+        const month = date.toLocaleString('default', { month: 'short' });
+        const year = date.getFullYear();
+    
+        const suffix = getDaySuffix(day);
+    
+        return `${day}${suffix} ${month}, ${year}`;
+    }
+    
+    function getDaySuffix(day) {
+        if (day > 3 && day < 21) return 'th';
+        switch (day % 10) {
+            case 1: return 'st';
+            case 2: return 'nd';
+            case 3: return 'rd';
+            default: return 'th';
+        }
+    }
+    
+  
+
     
 
 
@@ -31,7 +54,7 @@ const Dashboard = () => {
                 <header className='upertextfixed'>
                     <div className='dashborad-header'>
                         <p className='welcome'>Welcome! Kumar</p>
-                        <p className='date'>12th Jan, 2024</p>
+                        <p className='date'>{formatDate()}</p>
                     </div>
                     <div className='dashborad-header'>
                         <div className='boardwithtext'>
