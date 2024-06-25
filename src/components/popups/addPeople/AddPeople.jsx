@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./AddPeople.css"
 
-const AddPeople = ({ onclose }) => {
+const AddPeople = ({ onclose, mail}) => {
   const [email, setEmail] = useState('');
 
 
@@ -10,7 +10,7 @@ const AddPeople = ({ onclose }) => {
     <div className="container">
       <div className='addgmailbox'>
 
-        <p className='gmiailtext'>Akashgupta@gmail.com added to board</p>
+        <p className='gmiailtext'>{mail} added to board</p>
         <div className='gmailbtnadd' onClick={onclose}>
           Okay, got it!
 
