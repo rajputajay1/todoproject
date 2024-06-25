@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './ContainerBox.css';
 import TaskPopup from '../Popup/TaskPopup';
+import Delet from '../popups/delete/Delet';
+
 import { useDispatch } from 'react-redux';
 import { removeTask, updateTaskStatus, updateChecklistChecked } from '../../Features/TodoSlice';
 
@@ -170,7 +172,9 @@ const ContainerBox = ({ name, img, data }) => {
             {addpopup && <TaskPopup closePopup={closePopup} />}
             {editpopup && <TaskPopup closePopup={() => setEditPopup(false)} task={taskToEdit} />}
             {deletepopup && (
-                <div>Delete Popup Placeholder</div>
+            
+                <Delet onClose={handleDeleteClose} onConfirm={confirmDelete} text="delete this task" />
+
             )}
         </>
     );

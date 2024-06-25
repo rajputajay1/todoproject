@@ -22,9 +22,6 @@ const Dashboard = () => {
     const handleAddPeople = () => setShowAddPeoplePopup(true);
     const handleCloseAddPeoplePopup = () => setShowAddPeoplePopup(false);
 
-<<<<<<< HEAD
-
-=======
     function formatDate() {
         const date = new Date();
         const day = date.getDate();
@@ -45,12 +42,8 @@ const Dashboard = () => {
             default: return 'th';
         }
     }
-    
-  
 
     
->>>>>>> c711aabf5100821138face668e1a4c22828f6fdb
-
 
     const Alltasks = useSelector(state => state.todo.tasks);
 
