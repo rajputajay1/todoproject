@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import './Register.css';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { SignInuser, SignUpuser } from '../../Utils/ApiCalls';
+
 
 const AuthPage = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -10,16 +14,36 @@ const AuthPage = () => {
     confirmPassword: '',
   });
 
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
     console.log(formData);
+    if (isRegister) {
+      dispatch(SignUpuser(formData)).then((response) => {
+        console.log(response + "bika");
+        if (response.payload && response.payload.success) {
+          navigate('/home');
+          console.log("api success");
+        } else {
+          console.log("api error");
+
+        }
+      });
+    } else {
+      dispatch(SignInuser({ email: formData.email, password: formData.password })).then((response) => {
+        if (response.payload && response.payload.success) {
+          navigate('/home');
+          console.log("login success");
+        } else {
+          console.log("Login failed");
+        }
+      });
+    }
   };
 
 
@@ -34,9 +58,9 @@ const AuthPage = () => {
         <div className="astronaut-image">
           <div className='formbox'>
 
-        
+
             <img src="Art.svg" alt="Astronaut" className='formimg' />
-            </div>
+          </div>
           <span className="welcome-text">Welcome aboard my friend</span>
           <span className="subtext">Just a couple of clicks and we start</span>
         </div>
@@ -60,7 +84,7 @@ const AuthPage = () => {
             <input
               type="email"
               name="email"
-                className='forminput'
+              className='forminput'
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
@@ -71,7 +95,7 @@ const AuthPage = () => {
             <input
               type="password"
               name="password"
-                className='forminput'
+              className='forminput'
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
@@ -84,13 +108,13 @@ const AuthPage = () => {
 
               <input
                 type="password"
-                  className='forminput'
+                className='forminput'
                 name="confirmPassword"
                 placeholder="Confirm Password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
               />
-                          <img src="seen.svg" alt="" className='passseenendform' />
+              <img src="seen.svg" alt="" className='passseenendform' />
 
             </div>
           )}

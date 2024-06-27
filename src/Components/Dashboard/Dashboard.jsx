@@ -4,8 +4,10 @@ import ContainerBox from '../ContainerBox/ContainerBox';
 import PeopleAdded from '../popups/peopleAdded/PeopleAdded';
 import { useSelector } from 'react-redux';
 import Add from "../../../public/add.svg";
+import Sidebar from '../Sidebar/Sidebar';
 
 const Dashboard = () => {
+
     const [showAddPeoplePopup, setShowAddPeoplePopup] = useState(false);
     const [week, setWeek] = useState(false);
 
@@ -27,12 +29,12 @@ const Dashboard = () => {
         const day = date.getDate();
         const month = date.toLocaleString('default', { month: 'short' });
         const year = date.getFullYear();
-    
+
         const suffix = getDaySuffix(day);
-    
+
         return `${day}${suffix} ${month}, ${year}`;
     }
-    
+
     function getDaySuffix(day) {
         if (day > 3 && day < 21) return 'th';
         switch (day % 10) {
@@ -43,7 +45,7 @@ const Dashboard = () => {
         }
     }
 
-    
+
 
     const Alltasks = useSelector(state => state.todo.tasks);
 

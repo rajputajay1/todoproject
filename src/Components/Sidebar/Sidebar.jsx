@@ -16,7 +16,7 @@ const Sidebar = () => {
 
     const sidebarlist = [
 
-        { name: "Board", icon: "./sidebar2.svg", path: "/" },
+        { name: "Board", icon: "./sidebar2.svg", path: "/home" },
         { name: "Analytics", icon: "./sidebar3.svg", path: "/analytics" },
         { name: "Settings", icon: "./sidebar4.svg", path: "/settings" }
     ];
@@ -30,19 +30,19 @@ const Sidebar = () => {
         setLogOut(false)
     }
 
-    // const renderContent = () => {
-    //     switch (activeItem) {
+    const renderContent = () => {
+        switch (activeItem) {
 
-    //         case "Board":
-    //             return <Dashboard />;
-    //         case "Analytics":
-    //             return <Analytics />;
-    //         case "Settings":
-    //             return <Setting />;
-    //         default:
-    //             return <Dashboard />;
-    //     }
-    // };
+            case "Board":
+                return <Dashboard />;
+            case "Analytics":
+                return <Analytics />;
+            case "Settings":
+                return <Setting />;
+            default:
+                return <Dashboard />;
+        }
+    };
     return (
         <>
 
@@ -76,8 +76,8 @@ const Sidebar = () => {
                 </div>
             </div>
             <div className="allcontentrandring">
-                {/* {renderContent()} */}
-                <Router></Router>
+                {renderContent()}
+                {/* <Router></Router> */}
 
             </div>
 

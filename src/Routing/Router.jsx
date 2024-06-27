@@ -3,12 +3,13 @@ import { Routes, Route } from 'react-router-dom';
 import Dashboard from '../Components/Dashboard/Dashboard';
 import Analytics from '../Pages/Analytics/Analytics';
 import Setting from '../Pages/Setting/Setting';
+import Sidebar from '../Components/Sidebar/Sidebar';
 
 const Router = () => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/home" element={<Dashboard />} />
                 <Route path="/analytics" element={<Analytics />} />
                 <Route path="/settings" element={<Setting />} />
             </Routes>
