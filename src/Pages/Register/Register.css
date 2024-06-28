@@ -83,6 +83,7 @@
   align-items: center;
   position: relative;
   justify-content: start;
+  
 }
 
 .frommail {
@@ -95,12 +96,16 @@
   height: 50px;
   border: 1px solid #ccc;
   border-radius: 10px;
+  font-size: 20px;
 }
 
+
 .forminput::placeholder {
-  padding: 30px 35px 0 35px;
   font-size: 20px;
 
+}
+.forminput{
+  padding: 0 40px;
 }
 
 .auth-button {
@@ -167,7 +172,8 @@
 
 .passseenendform {
   position: absolute;
-  left: 470px;
+  /* left: 470px; */
+  right: 10px;
 }
 
 #mailid {
