@@ -4,7 +4,7 @@ import TaskPopup from '../Popup/TaskPopup';
 import Delet from '../popups/delete/Delet';
 
 import { useDispatch } from 'react-redux';
-import { removeTask, updateTaskStatus, updateChecklistChecked } from '../../Features/TodoSlice';
+import { removeTask, updateTaskStatus, updateChecklistChecked } from '../../Features/slice';
 
 const ContainerBox = ({ name, img, data }) => {
     const [addpopup, setAddPopup] = useState(false);

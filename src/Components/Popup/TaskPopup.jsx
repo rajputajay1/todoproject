@@ -4,7 +4,7 @@ import './TaskPopup.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useDispatch } from 'react-redux';
-import { addTasks, updateTask } from '../../Features/TodoSlice';
+import { addTasks, updateTask } from '../../Features/slice';
 import { nanoid } from '@reduxjs/toolkit';
 
 const TaskPopup = ({ closePopup, task }) => {
