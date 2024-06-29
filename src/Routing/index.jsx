@@ -13,12 +13,24 @@ const Routing = () => {
       <Routes>
         <Route
           path="/auth"
-          element={token ? <Navigate to="/home" /> : <AuthPage />}
+          element={
+            token && token != "undefined" ? (
+              <Navigate to="/home" />
+            ) : (
+              <AuthPage />
+            )
+          }
         />
         {/* <Route path="/quiz/:id" element={<QuizContainer />} /> */}
         <Route
           path="/"
-          element={token ? <Navigate to="/home" /> : <Navigate to="/auth" />}
+          element={
+            token && token != "undefined" ? (
+              <Navigate to="/home" />
+            ) : (
+              <Navigate to="/auth" />
+            )
+          }
         />
 
         <Route

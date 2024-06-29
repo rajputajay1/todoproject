@@ -74,7 +74,6 @@ const ContainerBox = ({ name, img, data }) => {
     return (
         <>
             <div className='containerbox'>
-                <div className='scrollable'>
                     <div className="container-header">
                         <p className="containertext">{name}</p>
                         <div className='addimg'>
@@ -167,7 +166,7 @@ const ContainerBox = ({ name, img, data }) => {
                             </div>
                         ))}
                     </div>
-                </div>
+               
             </div>
             {addpopup && <TaskPopup closePopup={closePopup} />}
             {editpopup && <TaskPopup closePopup={() => setEditPopup(false)} task={taskToEdit} />}

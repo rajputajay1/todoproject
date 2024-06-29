@@ -15,6 +15,8 @@ const AuthPage = () => {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
+  const [passwordVisible, setPasswordVisible] = useState(false); // State for password visibility
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,7 +56,7 @@ const AuthPage = () => {
     setLoading(true);
     try {
       const response = await postData(
-        `/user/${isRegister?'register':'login'}`,
+        `/user/${isRegister ? "register" : "login"}`,
         formData
       ); // Update the endpoint as necessary
 
@@ -64,7 +66,9 @@ const AuthPage = () => {
       navigate("/home"); // Redirect to home page
     } catch (error) {
       console.error("Login failed:", error.message);
-      toast.error(`${isRegister?'Register':'Login'} failed: ${error.message}`);
+      toast.error(
+        `${isRegister ? "Register" : "Login"} failed: ${error.message}`
+      );
     } finally {
       setLoading(false);
     }
@@ -76,6 +80,23 @@ const AuthPage = () => {
     setErrors({});
   };
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setConfirmPasswordVisible(!confirmPasswordVisible);
+  };
+
+  const passwordStrength = (password) => {
+    if (password.length < 4) {
+      return "Weak";
+    } else if (password.length < 6) {
+      return "Medium";
+    } else {
+      return "Strong";
+    }
+  };
   return (
     <div className="auth-container">
       <ToastContainer />
@@ -88,7 +109,7 @@ const AuthPage = () => {
           <span className="subtext">Just a couple of clicks and we start</span>
         </div>
         <form className="auth-form" onSubmit={handleSubmit}>
-          <h2 className="head">{isRegister ? "Register" : "Login"}</h2>
+          <p className="head">{isRegister ? "Register" : "Login"}</p>
           {isRegister && (
             <div className="form-group">
               <div className="inner-form-input">
@@ -123,17 +144,35 @@ const AuthPage = () => {
             <div className="inner-form-input">
               <img src="pass.svg" alt="" className="frommail" />
               <input
-                type="password"
+                type={passwordVisible ? "text" : "password"}
                 name="password"
                 className="forminput"
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
               />
-              <img src="seen.svg" alt="" className="passseenendform" />
+              <img
+                src="seen.svg"
+                alt=""
+                className="passseenendform"
+                onClick={togglePasswordVisibility}
+              />
             </div>
             {errors.password && (
               <span className="error">{errors.password}</span>
+            )}
+            {isRegister && (
+              <div className="password-strength">
+                {formData.password && (
+                  <span
+                    className={`strength-${passwordStrength(
+                      formData.password
+                    ).toLowerCase()}`}
+                  >
+                    {passwordStrength(formData.password)}
+                  </span>
+                )}
+              </div>
             )}
           </div>
           {isRegister && (
@@ -141,14 +180,19 @@ const AuthPage = () => {
               <div className="inner-form-input">
                 <img src="pass.svg" alt="" className="frommail" />
                 <input
-                  type="password"
+                  type={confirmPasswordVisible ? "text" : "password"}
                   className="forminput"
                   name="confirmPassword"
                   placeholder="Confirm Password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                 />
-                <img src="seen.svg" alt="" className="passseenendform" />
+                <img
+                  src="seen.svg"
+                  alt=""
+                  className="passseenendform"
+                  onClick={toggleConfirmPasswordVisibility}
+                />
               </div>
               {errors.confirmPassword && (
                 <span className="error">{errors.confirmPassword}</span>
