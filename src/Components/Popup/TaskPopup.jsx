@@ -213,44 +213,48 @@ const TaskPopup = ({ closePopup, task }) => {
             <p className="tittle priority-text">LOW PRIORITY</p>
           </div>
         </div>
-        {task.isAdmin && <div className="assinetask">
-          <p className="tittle">Assign to</p>
-          <div style={{ width: "100%" }}>
-            <input
-              type="text"
-              className="todotaskinput"
-              placeholder="Add an assignee"
-              value={assine}
-              onChange={handleAssigneeChange}
-              onFocus={() => setFilteredMembers(members)}
-              style={{ width: "100%" }}
-            />
-            {filteredMembers.length > 0 && (
-              <div className="dropdown">
-                {filteredMembers.map((member) => (
-                  <div key={member.id} className="dropdown-item">
-                    <div className="avatar">{member.name.charAt(0)}</div>
-                    <div className="email">{member.email}</div>
-                    <button
-                      className={`assign-button ${
-                        selectedMember?.email === member.email ? "selected" : ""
-                      }`}
-                      onClick={() => assignMember(member)}
-                      style={{
-                        backgroundColor:
+        {((task && task.isAdmin) || !task) && (
+          <div className="assinetask">
+            <p className="tittle">Assign to</p>
+            <div style={{ width: "100%" }}>
+              <input
+                type="text"
+                className="todotaskinput"
+                placeholder="Add an assignee"
+                value={assine}
+                onChange={handleAssigneeChange}
+                onFocus={() => setFilteredMembers(members)}
+                style={{ width: "100%" }}
+              />
+              {filteredMembers.length > 0 && (
+                <div className="dropdown">
+                  {filteredMembers.map((member) => (
+                    <div key={member.id} className="dropdown-item">
+                      <div className="avatar">{member.name.charAt(0)}</div>
+                      <div className="email">{member.email}</div>
+                      <button
+                        className={`assign-button ${
                           selectedMember?.email === member.email
-                            ? "blue"
-                            : "#E2E2E2",
-                      }}
-                    >
-                      Assign
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
+                            ? "selected"
+                            : ""
+                        }`}
+                        onClick={() => assignMember(member)}
+                        style={{
+                          backgroundColor:
+                            selectedMember?.email === member.email
+                              ? "blue"
+                              : "#E2E2E2",
+                        }}
+                      >
+                        Assign
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
-        </div>}
+        )}
         <p className="tittle">
           Checklist <span className="star">*</span>
         </p>
