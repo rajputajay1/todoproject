@@ -1,282 +1,348 @@
 .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
 }
-.error{
-    color: red;
+.error {
+  color: red;
 }
 .popup-content {
-    background: white;
-    border-radius: 8px;
-    padding: 10px 30px 30px 30px;
-    width: 45%;
-    max-height: 80%;
-    overflow-y: auto;
+  background: white;
+  border-radius: 8px;
+  padding: 10px 30px 30px 30px;
+  width: 45%;
+  max-height: 80%;
+  overflow-y: auto;
 }
 
 .tittle {
-    font-size: 15px;
-    font-weight: 500;
-    color: #000000;
-    text-wrap: nowrap;
+  font-size: 15px;
+  font-weight: 500;
+  color: #000000;
+  text-wrap: nowrap;
 }
 
 .star {
-    color: #FF0000;
+  color: #ff0000;
 }
 
 .todotaskinput {
-    width: 97%;
-    height: 45px;
-    border-radius: 5px;
-    border: 1px solid #E2E2E2;
-    padding: 0 10px;
-    font-size: 16px;
-
+  width: 97%;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid #e2e2e2;
+  padding: 0 10px;
+  font-size: 16px;
 }
 
 .todotaskinput::placeholder {
-    color: #9B959F;
-    font-weight: 400;
-    font-size: 16px;
-    /* padding: 0 10px; */
+  color: #9b959f;
+  font-weight: 400;
+  font-size: 16px;
+  /* padding: 0 10px; */
 }
 
 .taskcirclehigh {
-    background-color: #FF2473;
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
+  background-color: #ff2473;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
 }
 
 .taskcirclemid {
-    background-color: #18B0FF;
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
+  background-color: #18b0ff;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
 }
 
 .taskcirclelow {
-    background-color: #63C05B;
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
+  background-color: #63c05b;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
 }
 
 .taskhighpriority {
-    border: 1px solid #ccc;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0 10px;
-    border-radius: 6px;
-    cursor: pointer;
+  border: 1px solid #ccc;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  border-radius: 6px;
+  cursor: pointer;
 }
-
+.priority-text {
+  font-size: 10px;
+}
 .taskbtns {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: space-between;
 }
 
 .assinetask {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+  display: flex;
+  /* align-items: center;5 */
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .todotassin {
-    height: 45px;
-    border-radius: 5px;
-    border: 1px solid #E2E2E2;
-    padding: 0 10px;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid #e2e2e2;
+  padding: 0 10px;
 }
 
 .checklist-container {
-    max-height: 200px;
-    overflow-y: auto;
-    margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 10px;
 }
 
 .addtaskall {
-    /* position: relative; */
-    display: flex;
-    align-items: center;
-    /* flex-direction: column; */
-    /* gap: 10px;  */
-    width: 100%;
+  /* position: relative; */
+  display: flex;
+  align-items: center;
+  /* flex-direction: column; */
+  /* gap: 10px;  */
+  width: 100%;
 }
 
 .taskcheckbox {
-    /* margin-right: 10px; */
-    cursor: pointer;
+  /* margin-right: 10px; */
+  cursor: pointer;
 }
 
 .taskcheckboxend {
-    position: absolute;
-    right: 10px;
-    cursor: pointer;
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
 }
 
 .todotaskinputadd {
-    /* width: 100%; */
-    height: 45px;
-    border-radius: 5px;
-    border: 1px solid #E2E2E2;
-    padding: 0 30px;
-    display: flex;
-    flex-direction: column;
+  /* width: 100%; */
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid #e2e2e2;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .addbtntask {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .addnewtask {
-    font-size: 16px;
-    font-weight: 500;
-    color: #767575;
-    cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #767575;
+  cursor: pointer;
 }
 
 .datebtntask {
-    font-size: 16px;
-    font-weight: 500;
-    color: #707070;
-    border: 1px solid #E2E2E2;
-    padding: 0 10px;
-    height: 40px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    width: 150px;
-    justify-content: center;
-    cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #707070;
+  border: 1px solid #e2e2e2;
+  padding: 0 10px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  width: 150px;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .canclebtntask {
-    color: #CF3636;
-    font-size: 16px;
-    font-weight: 500;
-    border: 1px solid #CF3636;
-    padding: 0 10px;
-    height: 40px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    width: 120px;
-    justify-content: center;
-    cursor: pointer;
+  color: #cf3636;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid #cf3636;
+  padding: 0 10px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  width: 120px;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .savebtntask {
-    background-color: #17A2B8;
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 0 10px;
-    height: 40px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    width: 120px;
-    justify-content: center;
-    cursor: pointer;
+  background-color: #17a2b8;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0 10px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  width: 120px;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .threebtntask {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    /* Add some space at the top */
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  /* Add some space at the top */
 }
 
 .savecanclebtn {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .dateinput {
-    font-size: 16px;
-    font-weight: 500;
-    color: #707070;
-    border: 1px solid #E2E2E2;
-    padding: 0 10px;
-    height: 40px;
-    border-radius: 8px;
-    display: block;
-    margin-top: 10px;
-    cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #707070;
+  border: 1px solid #e2e2e2;
+  padding: 0 10px;
+  height: 40px;
+  border-radius: 8px;
+  display: block;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
 .checklist-container {
-    max-height: 200px;
-    overflow-y: auto;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .taskcheckbox {
-    position: absolute;
-    left: 5px;
+  position: absolute;
+  left: 5px;
 }
 
 .selected {
-    background-color:
-        #EEECEC;
+  background-color: #eeecec;
 }
 
 .mainaddtasktodo {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .taskItem {
-    display: flex;
-    align-items: center;
-    position: relative;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .inputcheckboxtodostart {
-    position: absolute;
-    left: 5px;
-    cursor: pointer;
-
+  position: absolute;
+  left: 5px;
+  cursor: pointer;
 }
 
 .ajay {
-    flex-grow: 1;
-    height: 45px;
-    border-radius: 5px;
-    border: 1px solid #E2E2E2;
-    padding-left: 30px;
-    font-size: 16px;
-
-
+  flex-grow: 1;
+  height: 45px;
+  border-radius: 5px;
+  border: 1px solid #e2e2e2;
+  padding-left: 30px;
+  font-size: 16px;
 }
 
 .ajay::placeholder {
-    /* padding-left: 20px; */
-    font-size: 16px;
+  /* padding-left: 20px; */
+  font-size: 16px;
 }
 
 .inputcheckboxtodoend {
-    position: absolute;
-    cursor: pointer;
-    right: 10px;
+  position: absolute;
+  cursor: pointer;
+  right: 10px;
+}
+
+/* TaskPopup.css */
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* width: inherit; */
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  /* top:20px */
+}
+
+/* Dropdown item */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+/* Avatar styling */
+.avatar {
+  background-color: #FFEBEB;
+  color: #555;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* Email styling */
+.email {
+  flex-grow: 1;
+  font-size: 16px;
+  color: #20102b;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+}
+
+/* Assign button styling */
+.assign-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.assign-button:hover {
+  background-color: #0056b3;
+}
+
+* {
+  font-family: "Inter", sans-serif;
 }

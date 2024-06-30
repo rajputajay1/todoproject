@@ -1,72 +1,38 @@
-// import React from 'react'
-// import './PeopleAdded.css'
-// import { useState } from 'react'
-// import AddPeople from '../addPeople/AddPeople'
-
-// function PeopleAdded({ onclose }) {
-
-//   const [gmailadd, setGmailAdd] = useState(false)
-//   const [gmail,setGmail]=useState("")
-
-//   const handleGmailAdd = () => {
-//     setGmailAdd(true)
-//   }
-//   const handleGmailclose = () => {
-//     setGmailAdd(false)
-//     onclose()
-//   }
-
-//   return (
-//     <>
-
-//       <div className="popup-overlaypeople">
-//         <div className="popup-contentpeople">
-//           <p className='addpeople'>Add people to the board </p>
-//           <input type="text" className='addpeopleinput'
-//             placeholder='Enter the email'
-//             onChange={(e) => setGmail(e.target.value)}
-//           />
-//           <div className='bothbtnaddpeople'>
-
-
-//             <div className='canclebtnpeopleadd' onClick={onclose}>
-//               Cancel
-//             </div>
-//             <div className='addemailbtnpeopleadd' onClick={handleGmailAdd}>
-//               Add Email
-//             </div>
-//           </div>
-//           {/* Add your form or content here */}
-//         </div>
-//       </div>
-//       {gmailadd && (
-//         <div>
-//           <AddPeople onclose={handleGmailclose} mail={gmail} />
-//         </div>
-//       )}
-//     </>
-
-//   )
-// }
-
-// export default PeopleAdded
-
-import React, { useState } from 'react';
-import './PeopleAdded.css';
-import AddPeople from '../addPeople/AddPeople';
+import React, { useEffect, useState } from "react";
+import "./PeopleAdded.css";
+import AddPeople from "../addPeople/AddPeople";
+import { fetchGetData, patchData, postData } from "../../../api";
 
 function PeopleAdded({ onclose }) {
   const [gmailadd, setGmailAdd] = useState(false);
   const [gmail, setGmail] = useState("");
-  const [emailValid, setEmailValid] = useState(true);
-  const [emailError, setEmailError] = useState("");
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState({});
+  console.log(Object.keys(selectedUser).length);
+  useEffect(() => {
+    async function getUsers() {
+      const token = localStorage.getItem("token");
+      const fetchUsers = await fetchGetData("user/get-all-users", {}, token);
+      console.log(fetchUsers);
+      setUsers(fetchUsers.data);
+    }
+    getUsers();
+  }, []);
 
-  const handleGmailAdd = () => {
-    if (validateEmail(gmail)) {
-      setGmailAdd(true);
-      setEmailError("");
-    } else {
-      setEmailError("Email format is not correct");
+  const handleGmailAdd = async () => {
+    if (selectedUser) {
+      try {
+        const token = localStorage.getItem("token");
+        const newMember = await patchData(
+          "user/addMember",
+          {
+            email: gmail,
+          },
+          token
+        );
+        setGmailAdd(true);
+      } catch (err) {}
     }
   };
 
@@ -75,48 +41,64 @@ function PeopleAdded({ onclose }) {
     onclose();
   };
 
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
   const handleEmailChange = (e) => {
     const email = e.target.value;
     setGmail(email);
-    if (email === "") {
-      setEmailValid(false);
-      setEmailError("Email is required");
-    } else if (!validateEmail(email)) {
-      setEmailValid(false);
-      setEmailError("Invalid Email");
+    setSelectedUser({});
+    if (email) {
+      const filtered = users.filter((user) =>
+        user.email.toLowerCase().includes(email.toLowerCase())
+      );
+      setFilteredUsers(filtered);
     } else {
-      setEmailValid(true);
-      setEmailError("");
+      setFilteredUsers([]);
     }
+  };
+
+  const handleUserSelect = (user) => {
+    setSelectedUser(user);
+    setGmail(user.email);
+    setFilteredUsers([]);
   };
 
   return (
     <>
       <div className="popup-overlaypeople">
         <div className="popup-contentpeople">
-          <p className='addpeople'>Add people to the board</p>
+          <p className="addpeople">Add people to the board</p>
           <input
             type="text"
-            className='addpeopleinput'
-            placeholder='Enter the email'
+            className="addpeopleinput"
+            placeholder="Enter the email"
+            value={gmail}
             onChange={handleEmailChange}
           />
-          {emailError && <p className='email-error'>{emailError}</p>}
-          <div className='bothbtnaddpeople'>
-            <div className='canclebtnpeopleadd' onClick={onclose}>
+          {filteredUsers.length > 0 && (
+            <div className="user-suggestions">
+              {filteredUsers.map((user) => (
+                <div
+                  key={user._id}
+                  className="user-suggestion"
+                  onClick={() => handleUserSelect(user)}
+                >
+                  {user.email}
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="bothbtnaddpeople">
+            <div className="canclebtnpeopleadd" onClick={onclose}>
               Cancel
             </div>
-            <div
-              className={`addemailbtnpeopleadd ${emailValid ? '' : 'disabled'}`}
+            <button
+              className={`addemailbtnpeopleadd ${
+                Object.keys(selectedUser).length == 0 ? "disabled" : ""
+              }`}
               onClick={handleGmailAdd}
+              disabled={Object.keys(selectedUser).length == 0}
             >
               Add Email
-            </div>
+            </button>
           </div>
         </div>
       </div>

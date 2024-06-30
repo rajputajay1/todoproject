@@ -1,38 +1,16 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { fetchTasks } from "./thunk";
+import { addTask, fetchAnalytics, fetchTasks, updateTask } from "./thunk";
 
 const todoSlice = createSlice({
   name: "todos",
   initialState: {
-    tasks: [
-      {
-          id: nanoid(),
-          title: "ajay",
-          priority: 'HIGH',
-          status: 'to-do',
-          assineto: [],
-          checklist: [
-              { task: 'rahul', checked: true },
-              { task: 'ajauy', checked: false },
-              { task: 'sahil', checked: false },
-              { task: 'fghf', checked: false },
-          ],
-          dueDate: 'Jun 17',
-      },
-    ],
+    tasks: [],
+    analytics:{},
+    loading: false,
+    error: null,
+    // newDataLoading: true,
   },
   reducers: {
-    addTasks: (state, action) => {
-      state.tasks.push(action.payload);
-    },
-    updateTask: (state, action) => {
-      const index = state.tasks.findIndex(
-        (task) => task.id === action.payload.id
-      );
-      if (index !== -1) {
-        state.tasks[index] = { ...state.tasks[index], ...action.payload };
-      }
-    },
     removeTask: (state, action) => {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
     },
@@ -55,24 +33,61 @@ const todoSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchTasks.fulfilled, (state, action) => {
-      console.log(action.payload);
-    });
-    builder.addCase(fetchTasks.pending, (state, action) => {
-      console.log(action.payload);
-    });
-    builder.addCase(fetchTasks.rejected, (state, action) => {
-      console.log(action.payload);
-    });
+    builder
+      .addCase(fetchTasks.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTasks.fulfilled, (state, action) => {
+        state.loading = false;
+        state.tasks = action.payload.data;
+      })
+      .addCase(fetchTasks.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(addTask.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addTask.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(addTask.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateTask.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateTask.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(updateTask.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(fetchAnalytics.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAnalytics.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        console.log(action.payload)
+        state.analytics = action.payload.data
+      })
+      .addCase(fetchAnalytics.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
   },
 });
 
-export const {
-  addTasks,
-  updateTask,
-  removeTask,
-  updateTaskStatus,
-  updateChecklistChecked,
-} = todoSlice.actions;
+export const { removeTask, updateTaskStatus, updateChecklistChecked } =
+  todoSlice.actions;
 
 export default todoSlice.reducer;

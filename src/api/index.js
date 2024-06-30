@@ -42,11 +42,19 @@ export const fetchGetData = async (endpoint, params = {}, token = null) => {
   }
 };
 
-export const updateData = async (endpoint, data = {}) => {
+export const updateData = async (endpoint, data = {}, token = null) => {
   try {
     const formData = transformToFormData(data);
+    const config = {
+      headers: {},
+    };
 
-    const response = await axiosInstance.put(endpoint, formData);
+
+    // Add Authorization header if token is provided
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    const response = await axiosInstance.put(endpoint, formData, config);
     return response.data;
   } catch (error) {
     const errorMessage = getErrorMessage(error);
@@ -87,12 +95,19 @@ export const deleteData = async (endpoint) => {
 };
 
 
-export const patchData = async (endpoint, data = {}) => {
+export const patchData = async (endpoint, data = {}, token=null) => {
 
   try {
     const formData = transformToFormData(data);
+    const config = {
+      headers: {},
+    };
 
-    const response = await axiosInstance.patch(endpoint, formData);
+    // Add Authorization header if token is provided
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    const response = await axiosInstance.patch(endpoint, formData, config);
     return response.data;
   } catch (error) {
 

@@ -3,14 +3,18 @@ import "./Dashboard.css";
 import ContainerBox from "../ContainerBox/ContainerBox";
 import PeopleAdded from "../popups/peopleAdded/PeopleAdded";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom"; // Import useHistory for redirection
+import { toast } from "react-toastify"; // Import toast from react-toastify for displaying messages
+import "react-toastify/dist/ReactToastify.css"; // Import the default CSS for toastify
 import Add from "../../../public/add.svg";
 import Sidebar from "../Sidebar/Sidebar";
-import { fetchTasks } from "../../Features/thunk";
+import { fetchAnalytics, fetchTasks } from "../../Features/thunk";
 
 const Dashboard = () => {
   const [showAddPeoplePopup, setShowAddPeoplePopup] = useState(false);
   const [week, setWeek] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Use useHistory hook for navigation
   const [selectedweekoption, setSelectedWeekoption] = useState("This week");
 
   const handleoptionWeek = (Options) => {
@@ -50,16 +54,17 @@ const Dashboard = () => {
   }
 
   const Alltasks = useSelector((state) => state.todo.tasks);
-
-  const backlogTasks = Alltasks.filter((task) => task.status === "backlog");
-  const todoTasks = Alltasks.filter((task) => task.status === "to-do");
+  console.log(Alltasks)
+  const backlogTasks = Alltasks.filter((task) => task._id === "backlog")[0]?.tasks || [];
+  const todoTasks = Alltasks.filter((task) => task._id === "todo")[0]?.tasks || [];
   const inProgressTasks = Alltasks.filter(
-    (task) => task.status === "inProgress"
-  );
-  const doneTasks = Alltasks.filter((task) => task.status === "done");
+    (task) => task._id === "in-progress"
+  )[0]?.tasks || [];
+  const doneTasks = Alltasks.filter((task) => task._id === "done")[0]?.tasks || [];
 
   useEffect(() => {
-    dispatch(fetchTasks());
+    dispatch(fetchTasks())
+    dispatch(fetchAnalytics())
     
   }, []);
 
