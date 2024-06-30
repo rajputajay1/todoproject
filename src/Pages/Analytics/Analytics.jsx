@@ -19,6 +19,7 @@ console.log(allTasks)
 
   return (
     <>
+      <div className="analytic-container-box">
       <p className="Analytics">Analytics</p>
       <div className="analyticmaincontent">
         <div className="analyticback">
@@ -81,7 +82,8 @@ console.log(allTasks)
             <p className="analyticscouting">{dueTodayTasks}</p>
           </div>
         </div>
-      </div>
+        </div>
+        </div>
     </>
   );
 };

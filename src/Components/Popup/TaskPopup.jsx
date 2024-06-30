@@ -172,7 +172,7 @@ const TaskPopup = ({ closePopup, task }) => {
         <p className="tittle">
           Title <span className="star">*</span>
         </p>
-        <div>
+        <div className="taskItem">
           <input
             type="text"
             className="todotaskinput"
@@ -192,7 +192,7 @@ const TaskPopup = ({ closePopup, task }) => {
             onClick={() => handlebtn("high")}
           >
             <div className="taskcirclehigh"></div>
-            <p className="tittle priority-text">HIGH PRIORITY</p>
+            <p className=" priority-text">HIGH PRIORITY</p>
           </div>
           <div
             className={`taskhighpriority ${
@@ -201,7 +201,7 @@ const TaskPopup = ({ closePopup, task }) => {
             onClick={() => handlebtn("moderate")}
           >
             <div className="taskcirclemid"></div>
-            <p className="tittle priority-text">MODERATE PRIORITY</p>
+            <p className=" priority-text">MODERATE PRIORITY</p>
           </div>
           <div
             className={`taskhighpriority ${
@@ -210,13 +210,14 @@ const TaskPopup = ({ closePopup, task }) => {
             onClick={() => handlebtn("low")}
           >
             <div className="taskcirclelow"></div>
-            <p className="tittle priority-text">LOW PRIORITY</p>
+            <p className="priority-text">LOW PRIORITY</p>
           </div>
         </div>
         {((task && task.isAdmin) || !task) && (
           <div className="assinetask">
             <p className="tittle">Assign to</p>
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "100%" }} className="">
+              <div className="taskItem">
               <input
                 type="text"
                 className="todotaskinput"
@@ -225,7 +226,8 @@ const TaskPopup = ({ closePopup, task }) => {
                 onChange={handleAssigneeChange}
                 onFocus={() => setFilteredMembers(members)}
                 style={{ width: "100%" }}
-              />
+                />
+                </div>
               {filteredMembers.length > 0 && (
                 <div className="dropdown">
                   {filteredMembers.map((member) => (

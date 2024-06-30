@@ -39,6 +39,7 @@
     align-items: center;
     padding: 10px;
     cursor: pointer;
+    margin-bottom: 10px;
   }
   
   .sidebar-icon {
@@ -62,7 +63,6 @@
   
   .allcontentrandring {
     margin-left: 200px;
-    /* width: calc(100% - 200px); */
     height: 100%;
     width: 100%;
     padding: 0 30px;

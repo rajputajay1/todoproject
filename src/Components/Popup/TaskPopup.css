@@ -17,9 +17,9 @@
   background: white;
   border-radius: 8px;
   padding: 10px 30px 30px 30px;
-  width: 45%;
-  max-height: 80%;
-  overflow-y: auto;
+  width: 48%;
+  max-height: 85%;
+  /* overflow-y: auto; */
 }
 
 .tittle {
@@ -34,7 +34,7 @@
 }
 
 .todotaskinput {
-  width: 97%;
+  width: 100%;
   height: 45px;
   border-radius: 5px;
   border: 1px solid #e2e2e2;
@@ -42,6 +42,10 @@
   font-size: 16px;
 }
 
+.tittleinput {
+  width: 100%;
+  margin-right: 30px;
+}
 .todotaskinput::placeholder {
   color: #9b959f;
   font-weight: 400;
@@ -72,10 +76,10 @@
 
 .taskhighpriority {
   border: 1px solid #ccc;
-  height: 20px;
+  height: 28px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
   padding: 0 10px;
   border-radius: 6px;
   cursor: pointer;
@@ -86,16 +90,17 @@
 .taskbtns {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 7px;
+  margin-top: 5px;
   justify-content: space-between;
+  width: 100%;
 }
 
 .assinetask {
   display: flex;
-  /* align-items: center;5 */
+  width: 100%;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .todotassin {
@@ -197,12 +202,13 @@
   width: 120px;
   justify-content: center;
   cursor: pointer;
+  border: none;
 }
 
 .threebtntask {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 10px;
   /* Add some space at the top */
 }
 
@@ -243,7 +249,10 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  height: 120px;
+  overflow-y: auto;
 }
+
 
 .taskItem {
   display: flex;
@@ -307,7 +316,7 @@
 
 /* Avatar styling */
 .avatar {
-  background-color: #FFEBEB;
+  background-color: #ffebeb;
   color: #555;
   width: 24px;
   height: 24px;

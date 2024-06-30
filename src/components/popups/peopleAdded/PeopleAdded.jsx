@@ -66,13 +66,15 @@ function PeopleAdded({ onclose }) {
       <div className="popup-overlaypeople">
         <div className="popup-contentpeople">
           <p className="addpeople">Add people to the board</p>
-          <input
-            type="text"
-            className="addpeopleinput"
-            placeholder="Enter the email"
-            value={gmail}
-            onChange={handleEmailChange}
-          />
+          <div className="addemialinput">
+            <input
+              type="text"
+              className="addpeopleinput"
+              placeholder="Enter the email"
+              value={gmail}
+              onChange={handleEmailChange}
+            />
+          </div>
           {filteredUsers.length > 0 && (
             <div className="user-suggestions">
               {filteredUsers.map((user) => (

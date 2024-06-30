@@ -1,3 +1,7 @@
+.analytic-container-box{
+    position: fixed;
+}
+
 .Analytics {
     font-size: 22px;
     font-weight: 600;

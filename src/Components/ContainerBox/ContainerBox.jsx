@@ -53,7 +53,7 @@ const ContainerBox = ({ name, img, data }) => {
     console.log(taskId, newStatus, task);
     dispatch(updateTask({ ...task, id: taskId, status: newStatus }))
       .then((res) => {
-        console.log(res)
+        console.log(res);
         if (res.error) {
           toast.error(res.payload.message);
         } else {
@@ -124,9 +124,12 @@ const ContainerBox = ({ name, img, data }) => {
     console.log(collapsedTasks);
   };
 
+  const closeSharepopup = () => {
+    setSharepopup(false);
+  };
   return (
     <>
-      <div className="containerbox">
+      <div className="containerbox" >
         <div className="container-header">
           <p className="containertext">{name}</p>
           <div className="addimg">
