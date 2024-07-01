@@ -6,7 +6,7 @@ import Analytics from "../../Pages/Analytics/Analytics";
 import Dashboard from "../Dashboard/Dashboard";
 import Delet from "../popups/delete/Delet";
 // import Router from '../../Routing/Router';
-import { Link } from "react-router-dom";
+import { Link,Navigate } from "react-router-dom";
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState("Board");
@@ -26,7 +26,7 @@ const Sidebar = () => {
   const Logout = () => {
     localStorage.removeItem("token");
     console.log(localStorage.getItem("token"));
-    navigate("/");
+    Navigate("/");
   };
   
   const handleLogoutclose = () => {
