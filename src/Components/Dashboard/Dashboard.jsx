@@ -8,7 +8,8 @@ import { toast } from "react-toastify"; // Import toast from react-toastify for 
 import "react-toastify/dist/ReactToastify.css"; // Import the default CSS for toastify
 import Add from "../../../public/add.svg";
 import Sidebar from "../Sidebar/Sidebar";
-import { fetchAnalytics, fetchTasks } from "../../Features/thunk";
+
+import { fetchAnalytics, fetchTasks, fetchUserProfile } from "../../Features/thunk";
 
 const Dashboard = () => {
   const [showAddPeoplePopup, setShowAddPeoplePopup] = useState(false);
@@ -64,9 +65,11 @@ const Dashboard = () => {
   )[0]?.tasks || [];
   const doneTasks = Alltasks.filter((task) => task._id === "done")[0]?.tasks || [];
 
+
   useEffect(() => {
     dispatch(fetchTasks())
     dispatch(fetchAnalytics())
+    dispatch(fetchUserProfile())
     
   }, []);
 

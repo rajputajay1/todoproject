@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchGetData, postData, updateData } from "../api";
+import { fetchUserProfileApi,fetchGetData, postData, updateData,updateUserProfileApi } from "../api";
 
 // Fetch tasks thunk
 export const fetchTasks = createAsyncThunk(
@@ -99,3 +99,24 @@ export const fetchAnalytics = createAsyncThunk(
     }
   }
 );
+
+
+export const updateUserProfile = createAsyncThunk("updateUserProfile", async (userData, { rejectWithValue }) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await updateUserProfileApi(userData, token);
+    return response;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const fetchUserProfile = createAsyncThunk("fetchUserProfile", async (_, { rejectWithValue }) => {
+  try {
+    const token = localStorage.getItem("token");
+    const userProfile = await fetchUserProfileApi(token);
+    return userProfile;
+  } catch (error) {
+    return rejectWithValue(error.response.data);
+  }
+});
