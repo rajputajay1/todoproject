@@ -16,32 +16,38 @@ const Public = () => {
 
     return (
         <div className="pro-manage">
-            <header className="header">
-                <h1>
-                    <span role="img" aria-label="cube">🧊</span> Pro Manage
-                </h1>
-            </header>
+       
+                <div className='public-box'>
+           
+                <img src="./sidebar1st.svg" alt="" />
+                    <p className="public-protext">Pro Manage</p>
+                             
+              </div>
+              
+       
             <main className="main">
                 <div className="task-card">
                     <div className="priority">
                         <span className="priority-dot"></span>
+                        <p  className='public-priority '>
                         {task.priority}
+                        </p>  
                     </div>
-                    <h2 className="task-name">{task.name}</h2>
-                    <div className="checklist">
+                    <h2 className=" public-task-name">{task.name}</h2>
+                    <div className="public-checklist">
                         <p className="checklist-header">
                             Checklist ({task.checklist.filter(item => item.checked).length}/{task.checklist.length})
                         </p>
                         {task.checklist.map((item, index) => (
-                            <div key={index} className="checklist-item">
-                                <div className={`checkbox ${item.checked ? 'checked' : ''}`}></div>
-                                <div className="checklist-input">{item.name}</div>
+                            <div key={index} className="public-checklist-item">
+                                <div className={`public-checkbox ${item.checked ? 'checked' : ''}`}></div>
+                                <div className="public-checklist-input">{item.name}</div>
                             </div>
                         ))}
                     </div>
-                    <div className="due-date">
+                    <div className="public-due-date">
                         <span>Due Date</span>
-                        <span className="date">{task.dueDate}</span>
+                        <span className="public-date">{task.dueDate}</span>
                     </div>
                 </div>
             </main>
