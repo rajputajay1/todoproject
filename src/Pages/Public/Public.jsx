@@ -71,18 +71,18 @@ const Public = () => {
             {task.checklist &&
               task.checklist.length >= 0 &&
               task.checklist.map((item, index) => (
-                <div key={index} className="checklist-item">
+                <div key={index} className="public-checklist-item">
                   <div
-                    className={`checkbox ${item.isChecked ? "checked" : ""}`}
+                    className={`public-checkbox ${item.isChecked ? "checked" : ""}`}
                   ></div>
-                  <div className="checklist-input">{item.title}</div>
+                  <div className="public-checklist-input">{item.title}</div>
                 </div>
               ))}
           </div>
           {task.dueDate && (
-            <div className="due-date">
+            <div className="public-due-date">
               <span>Due Date</span>
-              <span className="date">{formatDate(task.dueDate)}</span>
+              <span className="public-date">{formatDate(task.dueDate)}</span>
             </div>
           )}
         </div>
