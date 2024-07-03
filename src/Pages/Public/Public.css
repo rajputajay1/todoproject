@@ -1,4 +1,4 @@
-/* .pro-manage {
+.pro-manage {
     font-family: Arial, sans-serif;
     max-width: 100%;
     margin: 0 auto;
@@ -54,6 +54,7 @@
   
   .checklist {
     margin: 15px 0;
+    /* display: flex; */
   }
   
   .checklist-header {
@@ -63,6 +64,9 @@
   
   .checklist-item {
     margin-bottom: 8px;
+    /* display: flex;
+    width: 70%; */
+
   }
   
   .checklist-input {
@@ -166,4 +170,4 @@
       padding: 3px 8px;
     }
   }
-   */
+  

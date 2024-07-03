@@ -155,7 +155,9 @@ export const fetchUserProfileApi = async (token) => {
     }
 
     const response = await axiosInstance.get("/user/me", config);
+    console.log(response.data)
     return response.data;
+  
   } catch (error) {
     const errorMessage = getErrorMessage(error);
     throw new Error(errorMessage);

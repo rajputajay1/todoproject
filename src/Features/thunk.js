@@ -115,6 +115,7 @@ export const fetchUserProfile = createAsyncThunk("fetchUserProfile", async (_, {
   try {
     const token = localStorage.getItem("token");
     const userProfile = await fetchUserProfileApi(token);
+    console.log(userProfile);
     return userProfile;
   } catch (error) {
     return rejectWithValue(error.response.data);
