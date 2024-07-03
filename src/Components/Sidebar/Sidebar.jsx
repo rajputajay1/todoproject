@@ -7,6 +7,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Delet from "../popups/delete/Delet";
 // import Router from '../../Routing/Router';
 import { Link,Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState("Board");

@@ -9,21 +9,29 @@ import "react-toastify/dist/ReactToastify.css"; // Import the default CSS for to
 import Add from "../../../public/add.svg";
 import Sidebar from "../Sidebar/Sidebar";
 import { fetchAnalytics, fetchTasks } from "../../Features/thunk";
+import { updateFilter } from "../../Features/slice";
 
 const Dashboard = () => {
   const [showAddPeoplePopup, setShowAddPeoplePopup] = useState(false);
   const [week, setWeek] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Use useHistory hook for navigation
-  const [selectedweekoption, setSelectedWeekoption] = useState("This week");
+  const filter = useSelector((state) => state.todo.filter);
+  const [selectedweekoption, setSelectedWeekoption] = useState(filter);
 
   const handleoptionWeek = (Options) => {
+    dispatch(updateFilter(Options))
     setSelectedWeekoption(Options);
     setWeek(false);
     console.log(Options);
     navigate(`/home?filter=${Options}`);
 
   };
+
+  useEffect(()=>{
+    dispatch(fetchTasks(filter))
+
+  },[filter])
 
   const handleWeek = () => setWeek(true);
   const handleCloseWeek = () => setWeek(false);
@@ -65,7 +73,7 @@ const Dashboard = () => {
   const doneTasks = Alltasks.filter((task) => task._id === "done")[0]?.tasks || [];
 
   useEffect(() => {
-    dispatch(fetchTasks())
+    dispatch(fetchTasks(filter))
     dispatch(fetchAnalytics())
     
   }, []);
@@ -87,7 +95,7 @@ const Dashboard = () => {
               </p>
             </div>
             <p className="week" onClick={handleWeek}>
-              {selectedweekoption}{" "}
+              {selectedweekoption=="week"?"This Week":selectedweekoption=="today"?"Today":"This Month"}{" "}
               <span>
                 <img src="./dashboard1.svg" alt="This week" />
               </span>
@@ -96,7 +104,7 @@ const Dashboard = () => {
               <div className="thisweek" onClick={handleCloseWeek}>
                 <p
                   className="thisweektext"
-                  onClick={() => handleoptionWeek("Today")}
+                  onClick={() => handleoptionWeek("today")}
                 >
                   Today
                 </p>

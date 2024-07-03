@@ -21,9 +21,8 @@ const transformToFormData = (data) => {
 
 export const fetchGetData = async (endpoint, params = {}, token = null) => {
   const queryString = buildQueryString(params);
-  const url = `${endpoint}?${queryString}`;
+  const url = queryString.length > 0 ? `${endpoint}?${queryString}` : endpoint;
   try {
-
     const config = {
       headers: {},
     };
@@ -91,7 +90,7 @@ export const deleteData = async (endpoint) => {
   };
   config.headers.Authorization = `Bearer ${token}`;
   console.log('deleteData', endpoint);
-  
+
   try {
     const response = await axiosInstance.delete(endpoint, config);
     return response.data;

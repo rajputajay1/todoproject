@@ -4,10 +4,10 @@ import { fetchGetData, postData, updateData } from "../api";
 // Fetch tasks thunk
 export const fetchTasks = createAsyncThunk(
   "fetchTasks",
-  async (_, { rejectWithValue }) => {
+  async (filter="week", { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("token");
-      const tasks = await fetchGetData("task/fetchTasks", {}, token);
+      const tasks = await fetchGetData(`task/fetchTasks?filter=${filter}`, {}, token);
       console.log(tasks);
       return tasks;
     } catch (error) {
