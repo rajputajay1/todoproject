@@ -21,6 +21,8 @@ const Dashboard = () => {
     setSelectedWeekoption(Options);
     setWeek(false);
     console.log(Options);
+    navigate(`/home?filter=${Options}`);
+
   };
 
   const handleWeek = () => setWeek(true);
@@ -100,13 +102,13 @@ const Dashboard = () => {
                 </p>
                 <p
                   className="thisweektext"
-                  onClick={() => handleoptionWeek("This week")}
+                  onClick={() => handleoptionWeek("week")}
                 >
                   This Week
                 </p>
                 <p
                   className="thisweektext"
-                  onClick={() => handleoptionWeek("This month")}
+                  onClick={() => handleoptionWeek("monthly")}
                 >
                   This Month
                 </p>

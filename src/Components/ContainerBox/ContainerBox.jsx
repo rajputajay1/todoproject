@@ -12,6 +12,7 @@ import {
 } from "../../Features/slice";
 import { fetchAnalytics, fetchTasks, updateTask } from "../../Features/thunk";
 import { toast } from "react-toastify";
+import { deleteData } from "../../api";
 
 const ContainerBox = ({ name, img, data }) => {
   const [addpopup, setAddPopup] = useState(false);
@@ -32,7 +33,7 @@ const ContainerBox = ({ name, img, data }) => {
     setTaskToEdit(task);
     setEditPopup(true);
   };
-  const handleDelete = (taskId) => {
+  const handleDelete = async (taskId) => {
     setTaskToDelete(taskId);
     setDeletePopup(true);
   };
@@ -42,9 +43,16 @@ const ContainerBox = ({ name, img, data }) => {
     setTaskToDelete(null);
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (taskToDelete) {
-      dispatch(removeTask(taskToDelete));
+      try {
+         await deleteData(`/task/delete/${taskToDelete}`);
+         dispatch(fetchTasks())
+        toast.success("Task deleted successfully");
+
+      } catch (err) {
+        toast.error("Task deleted Failed", err);
+      }
     }
     setDeletePopup(false);
     setTaskToDelete(null);
@@ -150,14 +158,14 @@ const ContainerBox = ({ name, img, data }) => {
             />
           </div>
         </div>
-        <div   className=" ">
+        <div className=" ">
           {data.map((task) => (
             <div className="container-content" key={task._id}>
               <div className="task-content">
                 <div className="container-header">
                   <div className="highbox">
-                    <div className="circle"></div>
-                    {/* <span className="high">{task.priority.toUpperCase()} PRIORITY</span> */}
+                    <div className="circle" style={{backgroundColor:`${task.priority == "high"?"#FF2473": task.priority=="moderate"?"#18B0FF":"#63C05B"}`}}></div>
+                    <span className="high" >{task.priority.toUpperCase()} PRIORITY</span>
                   </div>
                   <div className="ppp">
                     <img
@@ -180,7 +188,7 @@ const ContainerBox = ({ name, img, data }) => {
                         <p className="sharepopopbtns">Share</p>
                         <p
                           className="delteeshare"
-                          onClick={() => handleDelete(task.id)}
+                          onClick={() => handleDelete(task._id)}
                         >
                           Delete
                         </p>

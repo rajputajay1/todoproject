@@ -8,6 +8,7 @@ const todoSlice = createSlice({
     analytics:{},
     loading: false,
     error: null,
+    filter:"week"
     // newDataLoading: true,
   },
   reducers: {

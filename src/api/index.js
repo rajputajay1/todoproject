@@ -85,8 +85,15 @@ export const postData = async (endpoint, data = {}, token = null) => {
 };
 
 export const deleteData = async (endpoint) => {
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {},
+  };
+  config.headers.Authorization = `Bearer ${token}`;
+  console.log('deleteData', endpoint);
+  
   try {
-    const response = await axiosInstance.delete(endpoint);
+    const response = await axiosInstance.delete(endpoint, config);
     return response.data;
   } catch (error) {
     const errorMessage = getErrorMessage(error);

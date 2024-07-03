@@ -11,16 +11,15 @@ import { Link,Navigate } from "react-router-dom";
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState("Board");
   const [logout, setLogOut] = useState(false);
-
+  const filter = useSelector((state) => state.todo.filter);
   const sidebarlist = [
-    { name: "Board", icon: "./sidebar2.svg", path: "/home" },
+    { name: "Board", icon: "./sidebar2.svg", path: `/home?filter=${filter}` },
     { name: "Analytics", icon: "./sidebar3.svg", path: "/analytics" },
     { name: "Settings", icon: "./sidebar4.svg", path: "/settings" },
   ];
 
   const handleLogout = () => {
     setLogOut(true);
-
   };
 
   const Logout = () => {
@@ -28,7 +27,7 @@ const Sidebar = () => {
     console.log(localStorage.getItem("token"));
     Navigate("/");
   };
-  
+
   const handleLogoutclose = () => {
     setLogOut(false);
   };
@@ -91,7 +90,11 @@ const Sidebar = () => {
 
       {logout && (
         <div>
-          <Delet text="Logout" onClose={handleLogoutclose} onConfirm={Logout}></Delet>
+          <Delet
+            text="Logout"
+            onClose={handleLogoutclose}
+            onConfirm={Logout}
+          ></Delet>
         </div>
       )}
     </>
