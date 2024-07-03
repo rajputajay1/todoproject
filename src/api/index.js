@@ -122,3 +122,45 @@ export const patchData = async (endpoint, data = {}, token=null) => {
     throw new Error(errorMessage);
   }
 };
+
+
+export const updateUserProfileApi = async (userData, token) => {
+  try {
+    const config = {
+      headers: {},
+    };
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    const response = await axiosInstance.patch("/user/update", userData, config);
+    return response.data;
+  } catch (error) {
+    const errorMessage = getErrorMessage(error);
+    throw new Error(errorMessage);
+  }
+};
+
+
+export const fetchUserProfileApi = async (token) => {
+  try {
+    const config = {
+      headers: {},
+    };
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    const response = await axiosInstance.get("/user/me", config);
+    console.log(response.data)
+    return response.data;
+  
+  } catch (error) {
+    const errorMessage = getErrorMessage(error);
+    throw new Error(errorMessage);
+  }
+};
+
+

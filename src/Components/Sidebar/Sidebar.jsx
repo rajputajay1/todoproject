@@ -6,8 +6,9 @@ import Analytics from "../../Pages/Analytics/Analytics";
 import Dashboard from "../Dashboard/Dashboard";
 import Delet from "../popups/delete/Delet";
 // import Router from '../../Routing/Router';
-import { Link,Navigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState("Board");
@@ -22,11 +23,12 @@ const Sidebar = () => {
   const handleLogout = () => {
     setLogOut(true);
   };
+  const navigate = useNavigate(); // Use useHistory hook for navigation
 
   const Logout = () => {
     localStorage.removeItem("token");
     console.log(localStorage.getItem("token"));
-    Navigate("/");
+    navigate("/");
   };
 
   const handleLogoutclose = () => {

@@ -8,30 +8,23 @@ import { toast } from "react-toastify"; // Import toast from react-toastify for 
 import "react-toastify/dist/ReactToastify.css"; // Import the default CSS for toastify
 import Add from "../../../public/add.svg";
 import Sidebar from "../Sidebar/Sidebar";
-import { fetchAnalytics, fetchTasks } from "../../Features/thunk";
-import { updateFilter } from "../../Features/slice";
+
+import { fetchAnalytics, fetchTasks, fetchUserProfile } from "../../Features/thunk";
 
 const Dashboard = () => {
   const [showAddPeoplePopup, setShowAddPeoplePopup] = useState(false);
   const [week, setWeek] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Use useHistory hook for navigation
-  const filter = useSelector((state) => state.todo.filter);
-  const [selectedweekoption, setSelectedWeekoption] = useState(filter);
+  const [selectedweekoption, setSelectedWeekoption] = useState("This week");
 
   const handleoptionWeek = (Options) => {
-    dispatch(updateFilter(Options))
     setSelectedWeekoption(Options);
     setWeek(false);
     console.log(Options);
     navigate(`/home?filter=${Options}`);
 
   };
-
-  useEffect(()=>{
-    dispatch(fetchTasks(filter))
-
-  },[filter])
 
   const handleWeek = () => setWeek(true);
   const handleCloseWeek = () => setWeek(false);
@@ -72,9 +65,11 @@ const Dashboard = () => {
   )[0]?.tasks || [];
   const doneTasks = Alltasks.filter((task) => task._id === "done")[0]?.tasks || [];
 
+
   useEffect(() => {
-    dispatch(fetchTasks(filter))
+    dispatch(fetchTasks())
     dispatch(fetchAnalytics())
+    dispatch(fetchUserProfile())
     
   }, []);
 
@@ -95,7 +90,7 @@ const Dashboard = () => {
               </p>
             </div>
             <p className="week" onClick={handleWeek}>
-              {selectedweekoption=="week"?"This Week":selectedweekoption=="today"?"Today":"This Month"}{" "}
+              {selectedweekoption}{" "}
               <span>
                 <img src="./dashboard1.svg" alt="This week" />
               </span>
@@ -104,7 +99,7 @@ const Dashboard = () => {
               <div className="thisweek" onClick={handleCloseWeek}>
                 <p
                   className="thisweektext"
-                  onClick={() => handleoptionWeek("today")}
+                  onClick={() => handleoptionWeek("Today")}
                 >
                   Today
                 </p>

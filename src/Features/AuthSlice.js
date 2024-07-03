@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { json } from 'react-router-dom';
 import { SignInuser, SignUpuser } from '../Utils/ApiCalls';
+import { updateUserProfile ,fetchUserProfile} from './thunk';
 
 const AuthSlice = createSlice({
     name: 'auth',
@@ -62,7 +63,31 @@ const AuthSlice = createSlice({
             })
             .addCase(SignUpuser.rejected, (state, action) => {
                 state.user.loading = false;
-            });
+            }) 
+             .addCase(updateUserProfile.pending, (state, action) => {
+                state.status = 'loading';
+              })
+              .addCase(updateUserProfile.fulfilled, (state, { payload }) => {
+                state.status = 'succeeded';
+                state.user = payload.user;
+                state.error = null;
+              })
+              .addCase(updateUserProfile.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload || action.error.message;
+              }).addCase(fetchUserProfile.pending, (state, action) => {
+                state.status = 'loading';
+              })
+              .addCase(fetchUserProfile.fulfilled, (state, { payload }) => {
+                state.status = 'succeeded';
+                state.user = payload;
+                console.log(payload);
+                state.error = null;
+              })
+              .addCase(fetchUserProfile.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload || action.error.message;
+              });
     }
 });
 
