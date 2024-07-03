@@ -15,6 +15,9 @@ const todoSlice = createSlice({
     removeTask: (state, action) => {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
     },
+    updateFilter: (state, action) => {
+      state.filter = action.payload
+    },
     updateTaskStatus: (state, action) => {
       const { id, newStatus } = action.payload;
       const task = state.tasks.find((task) => task.id === id);
@@ -88,7 +91,7 @@ const todoSlice = createSlice({
   },
 });
 
-export const { removeTask, updateTaskStatus, updateChecklistChecked } =
+export const { removeTask, updateTaskStatus, updateChecklistChecked, updateFilter } =
   todoSlice.actions;
 
 export default todoSlice.reducer;

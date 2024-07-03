@@ -103,6 +103,9 @@ const Setting = () => {
   const toggleOldPasswordVisibility = () => {
     setOldPasswordVisible(!oldPasswordVisible);
   };
+  
+  // const userProfile = useSelector((state)=>state.auth.user)
+  // console.log(userProfile)
 
   const handleUpdate = () => {
     if ( !oldPassword || !newPassword) {
@@ -119,8 +122,8 @@ const Setting = () => {
 
     dispatch(updateUserProfile(userData));
   };
-
-  const passwordStrength = (password) => {
+   
+    const passwordStrength = (password) => {
     if (password.length < 4) {
       return "Weak";
     } else if (password.length < 6) {
