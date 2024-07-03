@@ -3,6 +3,7 @@ import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import PrivateRoute from "./PrivateRoutes";
 import AuthPage from "../Pages/Register/Register";
 import Sidebar from "../Components/Sidebar/Sidebar";
+import Public from "../Pages/Public/Public";
 
 const Routing = () => {
   const token = localStorage.getItem("token");
@@ -30,6 +31,12 @@ const Routing = () => {
             ) : (
               <Navigate to="/auth" />
             )
+          }
+        />
+        <Route
+          path="/task/:id"
+          element={
+              <Public />
           }
         />
 

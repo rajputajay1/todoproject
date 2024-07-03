@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./ContainerBox.css";
 import TaskPopup from "../Popup/TaskPopup";
@@ -46,7 +45,7 @@ const ContainerBox = ({ name, img, data }) => {
   const confirmDelete = async () => {
     if (taskToDelete) {
       try {
-         await deleteData(`/task/delete/${taskToDelete}`);
+        await deleteData(`/task/delete/${taskToDelete}`);
          dispatch(fetchTasks())
         toast.success("Task deleted successfully");
 
@@ -121,12 +120,25 @@ const ContainerBox = ({ name, img, data }) => {
   const handleAllCollapse = () => {
     if (collapsedTasks.length === data.length) {
       setCollapsedTasks([]); // Expand all tasks
-      }
+    }
    
   };
 
   const closeSharepopup = () => {
     setSharePopupTaskId(null);
+  };
+
+ const onClickShareCopy = (id) => {
+    const shareLink = `${"http://localhost:5173"}/#/task/${id}`;
+    navigator.clipboard
+      .writeText(shareLink)
+      .then(() => {
+        toast.success("Link copied to clipboard");
+      })
+      .catch((error) => {
+        console.error("Error copying to clipboard:", error);
+        toast.error("Error copying link to clipboard");
+      });
   };
 
   return (
@@ -159,8 +171,21 @@ const ContainerBox = ({ name, img, data }) => {
               <div className="task-content">
                 <div className="container-header">
                   <div className="highbox">
-                    <div className="circle" style={{backgroundColor:`${task.priority == "high"?"#FF2473": task.priority=="moderate"?"#18B0FF":"#63C05B"}`}}></div>
-                    <span className="high" >{task.priority.toUpperCase()} PRIORITY</span>
+                    <div
+                      className="circle"
+                      style={{
+                        backgroundColor: `${
+                          task.priority == "high"
+                            ? "#FF2473"
+                            : task.priority == "moderate"
+                            ? "#18B0FF"
+                            : "#63C05B"
+                        }`,
+                      }}
+                    ></div>
+                    <span className="high">
+                      {task.priority.toUpperCase()} PRIORITY
+                    </span>
                   </div>
                   <div className="ppp">
                     <img
@@ -171,10 +196,7 @@ const ContainerBox = ({ name, img, data }) => {
                       style={{ cursor: "pointer" }}
                     />
                     {sharePopupTaskId === task._id && (
-                      <div
-                        className="sharepopop"
-                        onClick={closeSharepopup}
-                      >
+                      <div className="sharepopop" onClick={closeSharepopup}>
                         <p
                           onClick={() => handleEditPopup(task)}
                           className="editbtn"
@@ -182,7 +204,13 @@ const ContainerBox = ({ name, img, data }) => {
                         >
                           Edit
                         </p>
-                        <p className="sharepopopbtns" style={{ cursor: "pointer" }}>Share</p>
+                        <p
+                          className="sharepopopbtns"
+                          style={{ cursor: "pointer" }}
+                          onClick={()=>onClickShareCopy(task._id)}
+                        >
+                          Share
+                        </p>
                         <p
                           className="delteeshare"
                           onClick={() => handleDelete(task._id)}
@@ -214,7 +242,9 @@ const ContainerBox = ({ name, img, data }) => {
                           : "./downarrow.svg"
                       }
                       alt={
-                        collapsedTasks.includes(task._id) ? "Expand" : "Collapse"
+                        collapsedTasks.includes(task._id)
+                          ? "Expand"
+                          : "Collapse"
                       }
                     />
                   </div>
