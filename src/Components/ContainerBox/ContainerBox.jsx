@@ -1,9 +1,8 @@
+
 import React, { useState } from "react";
 import "./ContainerBox.css";
 import TaskPopup from "../Popup/TaskPopup";
 import Delet from "../popups/delete/Delet";
-// import Add from "add.svg"
-
 import { useDispatch } from "react-redux";
 import {
   removeTask,
@@ -16,19 +15,20 @@ import { deleteData } from "../../api";
 
 const ContainerBox = ({ name, img, data }) => {
   const [addpopup, setAddPopup] = useState(false);
-  const [editpopup, setEditPopup] = useState(false); // State for edit popup
-  const [taskToEdit, setTaskToEdit] = useState(null); // State to hold task data for editing
+  const [editpopup, setEditPopup] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState(null);
   const [deletepopup, setDeletePopup] = useState(false);
-  const [sharepopup, setSharepopup] = useState(false);
+  const [sharePopupTaskId, setSharePopupTaskId] = useState(null);
   const [taskToDelete, setTaskToDelete] = useState(null);
-  const [collapsedTasks, setCollapsedTasks] = useState([]); // State to store collapsed tasks
+  const [collapsedTasks, setCollapsedTasks] = useState([]);
   const dispatch = useDispatch();
 
   const handleAddPopup = () => setAddPopup(true);
   const closePopup = () => {
     setAddPopup(false);
-    setEditPopup(false); // Close edit popup when adding new task
+    setEditPopup(false);
   };
+
   const handleEditPopup = (task) => {
     setTaskToEdit(task);
     setEditPopup(true);
@@ -59,22 +59,17 @@ const ContainerBox = ({ name, img, data }) => {
   };
 
   const changeTaskStatus = (taskId, newStatus, task) => {
-    console.log(taskId, newStatus, task);
     dispatch(updateTask({ ...task, id: taskId, status: newStatus }))
       .then((res) => {
-        console.log(res);
         if (res.error) {
           toast.error(res.payload.message);
         } else {
           dispatch(fetchTasks());
           dispatch(fetchAnalytics());
-          //   closePopup();
         }
-        // setLoading(false);
       })
       .catch((err) => {
         console.log(err);
-        // setLoading(false);
       });
   };
 
@@ -89,7 +84,6 @@ const ContainerBox = ({ name, img, data }) => {
       return checklistItem;
     });
 
-    // Create the updated task object with the updated checklist
     const updatedTask = {
       ...task,
       checklist: updatedChecklist,
@@ -102,14 +96,10 @@ const ContainerBox = ({ name, img, data }) => {
         } else {
           dispatch(fetchTasks());
           dispatch(fetchAnalytics());
-
-          //   closePopup();
         }
-        // setLoading(false);
       })
       .catch((err) => {
         console.log(err);
-        // setLoading(false);
       });
   };
 
@@ -118,7 +108,7 @@ const ContainerBox = ({ name, img, data }) => {
     return date.toLocaleDateString("en-US", { month: "long", day: "numeric" });
   };
 
-  const currentDate = new Date(); // Get current date
+  const currentDate = new Date();
 
   const toggleCollapse = (taskId) => {
     if (collapsedTasks.includes(taskId)) {
@@ -126,19 +116,22 @@ const ContainerBox = ({ name, img, data }) => {
     } else {
       setCollapsedTasks([...collapsedTasks, taskId]);
     }
-    console.log(collapsedTasks);
   };
-  const handleAllColaps = () => {
-    setCollapsedTasks(data);
-    console.log(collapsedTasks);
+
+  const handleAllCollapse = () => {
+    if (collapsedTasks.length === data.length) {
+      setCollapsedTasks([]); // Expand all tasks
+      }
+   
   };
 
   const closeSharepopup = () => {
-    setSharepopup(false);
+    setSharePopupTaskId(null);
   };
+
   return (
     <>
-      <div  className="containerbox" >
+      <div className="containerbox">
         <div className="container-header">
           <p className="containertext">{name}</p>
           <div className="addimg">
@@ -148,13 +141,15 @@ const ContainerBox = ({ name, img, data }) => {
                 alt="Add Task"
                 onClick={handleAddPopup}
                 className="addtaskpopupopen"
+                style={{ cursor: "pointer" }}
               />
             )}
             <img
               src="./collpas.svg"
               alt="Collapse"
               className="collpasbtn"
-              onClick={handleAllColaps}
+              onClick={handleAllCollapse}
+              style={{ cursor: "pointer" }}
             />
           </div>
         </div>
@@ -171,21 +166,23 @@ const ContainerBox = ({ name, img, data }) => {
                     <img
                       src="./dashdot.svg"
                       alt="Options"
-                      onClick={() => setSharepopup(true)}
+                      onClick={() => setSharePopupTaskId(task._id)}
                       className="dashdot"
+                      style={{ cursor: "pointer" }}
                     />
-                    {sharepopup && (
+                    {sharePopupTaskId === task._id && (
                       <div
                         className="sharepopop"
-                        onClick={() => setSharepopup(false)}
+                        onClick={closeSharepopup}
                       >
                         <p
                           onClick={() => handleEditPopup(task)}
                           className="editbtn"
+                          style={{ cursor: "pointer" }}
                         >
                           Edit
                         </p>
-                        <p className="sharepopopbtns">Share</p>
+                        <p className="sharepopopbtns" style={{ cursor: "pointer" }}>Share</p>
                         <p
                           className="delteeshare"
                           onClick={() => handleDelete(task._id)}
@@ -207,22 +204,23 @@ const ContainerBox = ({ name, img, data }) => {
                   </p>
                   <div
                     className="arrowbox"
-                    onClick={() => toggleCollapse(task.id)}
+                    onClick={() => toggleCollapse(task._id)}
+                    style={{ cursor: "pointer" }}
                   >
                     <img
                       src={
-                        collapsedTasks.includes("all")
+                        collapsedTasks.includes(task._id)
                           ? "./dasharrow.svg"
                           : "./downarrow.svg"
                       }
                       alt={
-                        collapsedTasks.includes("all") ? "Expand" : "Collapse"
+                        collapsedTasks.includes(task._id) ? "Expand" : "Collapse"
                       }
                     />
                   </div>
                 </div>
 
-                {collapsedTasks.includes(task.id) && (
+                {collapsedTasks.includes(task._id) && (
                   <div className="checklist">
                     {task.checklist.map((item, index) => (
                       <div className="innerbox" key={index}>
@@ -270,6 +268,7 @@ const ContainerBox = ({ name, img, data }) => {
                         onClick={() =>
                           changeTaskStatus(task._id, "backlog", task)
                         }
+                        style={{ cursor: "pointer" }}
                       >
                         <p>BACKLOG</p>
                       </div>
@@ -278,6 +277,7 @@ const ContainerBox = ({ name, img, data }) => {
                       <div
                         className="btnspriorty"
                         onClick={() => changeTaskStatus(task._id, "todo", task)}
+                        style={{ cursor: "pointer" }}
                       >
                         <p>TO-DO</p>
                       </div>
@@ -288,6 +288,7 @@ const ContainerBox = ({ name, img, data }) => {
                         onClick={() =>
                           changeTaskStatus(task._id, "in-progress", task)
                         }
+                        style={{ cursor: "pointer" }}
                       >
                         <p>IN PROGRESS</p>
                       </div>
@@ -296,6 +297,7 @@ const ContainerBox = ({ name, img, data }) => {
                       <div
                         className="btnspriorty"
                         onClick={() => changeTaskStatus(task._id, "done", task)}
+                        style={{ cursor: "pointer" }}
                       >
                         <p>DONE</p>
                       </div>
@@ -309,7 +311,7 @@ const ContainerBox = ({ name, img, data }) => {
       </div>
       {addpopup && <TaskPopup closePopup={closePopup} />}
       {editpopup && (
-        <TaskPopup closePopup={() => setEditPopup(false)} task={taskToEdit} />
+        <TaskPopup task={taskToEdit} closePopup={closePopup} isEdit={true} />
       )}
       {deletepopup && (
         <Delet
